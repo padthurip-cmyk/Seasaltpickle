@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SeaSalt Pickles – Spin & Win</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; background:#fffaf3; }
+    header { padding:15px; background:#7a1f1f; color:#fff; text-align:center; }
+    main { padding:20px; text-align:center; }
+    button { padding:12px 22px; background:#e67e22; color:#fff; border:none; border-radius:6px; cursor:pointer; }
+    button:disabled { background:#aaa; cursor:not-allowed; }
+
+    .wheel-container { margin:30px auto; width:300px; height:300px; position:relative; }
+    .wheel {
+      width:100%; height:100%;
+      border-radius:50%;
+      border:8px solid #e67e22;
+      background: conic-gradient(#f1c40f 0 60deg,#e67e22 60 120deg,#f1c40f 120 180deg,#e67e22 180 240deg,#f1c40f 240 300deg,#e67e22 300 360deg);
+      transition: transform 4s ease-out;
+    }
+    .pointer {
+      position:absolute; top:-20px; left:50%; transform:translateX(-50%);
+      width:0;height:0;
+      border-left:15px solid transparent;
+      border-right:15px solid transparent;
+      border-bottom:30px solid red;
+    }
+
+    #spinResult { display:none; margin-top:20px; }
+    #spinResult h2 { margin-bottom:10px; }
+
+    #otpModal {
+      display:none; position:fixed; inset:0;
+      background:rgba(0,0,0,0.6);
+      justify-content:center; align-items:center;
+      z-index:9999;
+    }
+    #otpBox {
+      background:#fff; padding:20px; width:90%; max-width:350px;
+      border-radius:8px; text-align:center;
+    }
+    #otpBox input { padding:10px; width:100%; margin:10px 0; }
+  </style>
+</head>
+
+<body>
+<header>
+  <h1>SeaSalt Pickles</h1>
+  <p>Spin & Win ₹500 Wallet Credit</p>
+</header>
+
+<main>
+  <div class="wheel-container">
+    <div class="pointer"></div>
+    <div id="wheel" class="wheel"></div>
+  </div>
+
+  <button id="spinBtn" onclick="startSpinFlow()">Spin Now</button>
+
+  <div id="spinResult">
+    <h2 id="resultTitle"></h2>
+    <p id="resultMessage"></p>
+  </div>
+</main>
+
+<!-- OTP MODAL -->
+<div id="otpModal">
+  <div id="otpBox">
+    <h3>Verify OTP</h3>
+    <p>Enter OTP sent to your phone</p>
+    <input id="otpInput" type="number" placeholder="Enter OTP" />
+    <button onclick="verifyOTP()">Verify</button>
+    <p id="otpMsg" style="color:red;"></p>
+  </div>
+</div>
+
+<script>
+/* ===== ADMIN CONFIG (EDIT ANYTIME) ===== */
+const SPIN_CONFIG = {
+  WIN_AMOUNT: 500,   // Change reward amount
+  WIN_ODDS: 20,      // 1 in 20 chance
+  OTP_LENGTH: 6,
+  OTP_EXPIRY_MS: 2 * 60 * 1000
+};
+/* ===================================== */
+
+let generatedOTP = null;
+let otpTime = null;
+
+function generateOTP() {
+  generatedOTP = Math.floor(
+    Math.pow(10, SPIN_CONFIG.OTP_LENGTH - 1) +
+    Math.random() * Math.pow(10, SPIN_CONFIG.OTP_LENGTH - 1)
+  ).toString();
+  otpTime = Date.now();
+  console.log("Demo OTP:", generatedOTP); // replace with SMS API later
+}
+
+function startSpinFlow() {
+  if (localStorage.getItem("otpVerified") === "true") {
+    runSpin();
+    return;
+  }
+  generateOTP();
+  document.getElementById("otpModal").style.display = "flex";
+}
+
+function verifyOTP() {
+  const input = document.getElementById("otpInput").value;
+  const msg = document.getElementById("otpMsg");
+
+  if (Date.now() - otpTime > SPIN_CONFIG.OTP_EXPIRY_MS) {
+    msg.innerText = "OTP expired. Please retry.";
+    return;
+  }
+  if (input === generatedOTP) {
+    localStorage.setItem("otpVerified", "true");
+    document.getElementById("otpModal").style.display = "none";
+    runSpin();
+  } else {
+    msg.innerText = "Invalid OTP";
+  }
+}
+
+function runSpin() {
+  document.getElementById("spinBtn").disabled = true;
+  const wheel = document.getElementById("wheel");
+
+  const spins = Math.floor(Math.random() * 4) + 4;
+  const degrees = spins * 360 + Math.floor(Math.random() * 360);
+  wheel.style.transform = `rotate(${degrees}deg)`;
+
+  const isWinner = Math.floor(Math.random() * SPIN_CONFIG.WIN_ODDS) === 0;
+
+  setTimeout(() => {
+    showResult(isWinner);
+  }, 2000);
+}
+
+function showResult(isWinner) {
+  const title = document.getElementById("resultTitle");
+  const message = document.getElementById("resultMessage");
+  document.getElementById("spinResult").style.display = "block";
+
+  if (isWinner) {
+    localStorage.setItem("walletBalance", SPIN_CONFIG.WIN_AMOUNT);
+    title.innerText = "🎉 Congratulations!";
+    message.innerText = `You won ₹${SPIN_CONFIG.WIN_AMOUNT}. Added to your wallet.`;
+  } else {
+    title.innerText = "😔 Try Again";
+    message.innerText = "Better luck next time!";
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 2000);
+  }
+}
+</script>
+</body>
+</html>
