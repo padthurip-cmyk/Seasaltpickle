@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sea Salt Pickles - Authentic Telugu Pickles & Podis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root{--primary:#2D5A27;--primary-dark:#1E3D1A;--primary-light:#4A7C43;--accent:#D4A84B;--accent-light:#F5E6C8;--bg-cream:#FDF9F3;--bg-white:#FFFFFF;--text-dark:#1A1A1A;--text-light:#7A7A7A;--border:#E8E2D9;--success:#27AE60;--error:#E74C3C;--shadow-sm:0 2px 8px rgba(45,90,39,0.08);--shadow-md:0 4px 20px rgba(45,90,39,0.12);--shadow-lg:0 8px 40px rgba(45,90,39,0.16);--radius-sm:8px;--radius-md:12px;--radius-lg:20px;--radius-xl:28px;--transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
+        *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'DM Sans',sans-serif;background:var(--bg-cream);color:var(--text-dark);line-height:1.6}h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600}a{text-decoration:none;color:inherit}button{font-family:inherit;cursor:pointer;border:none;outline:none}img{max-width:100%;height:auto}.container{max-width:1400px;margin:0 auto;padding:0 20px}
+        .announcement-bar{background:linear-gradient(90deg,var(--primary) 0%,var(--primary-light) 100%);color:white;padding:10px 0;text-align:center;font-size:13px;font-weight:500}.announcement-bar span{color:var(--accent);font-weight:700}
+        .header{background:var(--bg-white);position:sticky;top:0;z-index:1000;box-shadow:var(--shadow-sm)}.header-top{padding:12px 0;border-bottom:1px solid var(--border)}.header-top .container{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+        .logo{display:flex;align-items:center;gap:12px}.logo-icon{width:50px;height:50px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:24px}.logo-text{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--primary)}.logo-text span{color:var(--accent)}
+        .search-bar{flex:1;max-width:500px;position:relative}.search-bar input{width:100%;padding:14px 50px 14px 20px;border:2px solid var(--border);border-radius:var(--radius-xl);font-size:15px;font-family:inherit;transition:var(--transition)}.search-bar input:focus{border-color:var(--primary);outline:none}.search-bar button{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:var(--primary);color:white;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+        .header-actions{display:flex;align-items:center;gap:12px}.header-btn{display:flex;align-items:center;gap:8px;padding:12px 20px;border-radius:var(--radius-md);font-size:14px;font-weight:600;transition:var(--transition)}.header-btn.primary{background:var(--primary);color:white}.header-btn.primary:hover{background:var(--primary-dark)}.cart-btn{position:relative}.cart-count{position:absolute;top:-8px;right:-8px;background:var(--accent);color:var(--primary-dark);font-size:11px;font-weight:700;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center}.wallet-badge{background:var(--success);color:white;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;margin-left:4px;display:none}.wallet-badge.active{display:inline-block}
+        /* ========== SPIN WHEEL STYLES - START (Delete to remove spin feature) ========== */
+        .spin-btn{background:linear-gradient(135deg,#FF6B6B 0%,#FF8E53 100%);color:white;padding:12px 24px;border-radius:var(--radius-xl);font-weight:700;font-size:14px;animation:pulse-glow 2s infinite;box-shadow:0 4px 15px rgba(255,107,107,0.4)}@keyframes pulse-glow{0%,100%{box-shadow:0 4px 15px rgba(255,107,107,0.4)}50%{box-shadow:0 4px 25px rgba(255,107,107,0.6)}}
+        .spin-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:10000;display:none;align-items:center;justify-content:center;padding:20px}.spin-overlay.active{display:flex}
+        .spin-modal{background:linear-gradient(135deg,#1A1A2E 0%,#16213E 100%);border-radius:24px;width:100%;max-width:500px;padding:40px;position:relative;text-align:center;color:white}
+        .spin-close{position:absolute;top:15px;right:15px;width:36px;height:36px;background:rgba(255,255,255,0.1);border:none;border-radius:50%;color:white;font-size:20px;cursor:pointer}
+        .spin-title{font-size:28px;margin-bottom:10px;color:#FFD700}.spin-subtitle{color:#B8B8D1;margin-bottom:30px}
+        .spin-input{width:100%;padding:14px;border:2px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);border-radius:12px;font-size:16px;color:white;margin-bottom:15px}.spin-input:focus{border-color:#6C63FF;outline:none}.spin-input::placeholder{color:#6C6C8A}
+        .spin-error{color:#E74C3C;font-size:12px;text-align:left;margin-top:-10px;margin-bottom:10px;display:none}.spin-error.show{display:block}
+        .spin-submit{width:100%;padding:16px;background:linear-gradient(135deg,#6C63FF 0%,#5A52D5 100%);color:white;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:20px}
+        .wheel-area{display:none;margin-top:20px}.wheel-area.active{display:block}
+        .wheel-container{position:relative;width:280px;height:280px;margin:0 auto}
+        .wheel{width:100%;height:100%;border-radius:50%;position:relative;transition:transform 5s cubic-bezier(0.17,0.67,0.12,0.99);background:conic-gradient(#FFD700 0deg 45deg,#6C63FF 45deg 90deg,#FF6B6B 90deg 135deg,#4ECDC4 135deg 180deg,#FFD700 180deg 225deg,#9B59B6 225deg 270deg,#E74C3C 270deg 315deg,#3498DB 315deg 360deg);box-shadow:0 0 30px rgba(108,99,255,0.3)}
+        .wheel-pointer{position:absolute;top:-15px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:15px solid transparent;border-right:15px solid transparent;border-top:30px solid #FFD700;z-index:10}
+        .wheel-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:50px;height:50px;background:linear-gradient(135deg,#FFD700 0%,#FF8C00 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;z-index:5}
+        .spin-wheel-btn{margin-top:20px;padding:16px 40px;background:linear-gradient(135deg,#FFD700 0%,#FF8C00 100%);color:#1A1A2E;border:none;border-radius:50px;font-size:18px;font-weight:800;cursor:pointer}.spin-wheel-btn:disabled{opacity:0.5;cursor:not-allowed}
+        .spin-result{display:none;text-align:center;padding:20px}.spin-result.show{display:block}.spin-result h3{font-size:24px;margin-bottom:10px}.spin-result.win h3{color:#FFD700}.spin-result p{color:#B8B8D1}
+        .already-played{display:none;text-align:center;padding:20px}.already-played.show{display:block}.already-played h3{color:#FFD700;margin-bottom:10px}
+        .confetti{position:fixed;width:10px;height:10px;top:-20px;z-index:20000;animation:confetti-fall 4s ease-out forwards}@keyframes confetti-fall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
+        /* ========== SPIN WHEEL STYLES - END ========== */
+        .nav{padding:0;border-top:1px solid var(--border)}.nav-list{display:flex;align-items:center;justify-content:center;gap:8px;list-style:none;padding:12px 0;flex-wrap:wrap}.nav-list a{padding:10px 20px;border-radius:var(--radius-md);font-size:14px;font-weight:500;color:var(--text-light);transition:var(--transition)}.nav-list a:hover{background:var(--accent-light);color:var(--primary)}.nav-list a.active{background:var(--primary);color:white}
+        .hero{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);padding:60px 0;color:white}.hero-content{display:flex;align-items:center;justify-content:space-between;gap:40px}.hero-text{max-width:600px}.hero-badge{display:inline-block;padding:8px 16px;background:rgba(255,255,255,0.2);border-radius:50px;font-size:13px;font-weight:600;margin-bottom:20px}.hero-title{font-size:48px;line-height:1.1;margin-bottom:20px}.hero-desc{font-size:18px;opacity:0.9;margin-bottom:30px}.hero-buttons{display:flex;gap:15px;flex-wrap:wrap}.hero-btn{padding:16px 32px;border-radius:var(--radius-xl);font-size:16px;font-weight:600;transition:var(--transition)}.hero-btn.primary{background:white;color:var(--primary)}.hero-btn.outline{background:transparent;border:2px solid white;color:white}.hero-image{font-size:180px;opacity:0.9}
+        .features{background:var(--bg-white);padding:20px 0;border-bottom:1px solid var(--border)}.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px}.feature-item{display:flex;align-items:center;gap:15px;padding:15px;cursor:pointer}.feature-icon{width:50px;height:50px;background:var(--accent-light);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:24px}.feature-text h4{font-size:15px;margin-bottom:2px}.feature-text p{font-size:13px;color:var(--text-light)}
+        .categories{padding:60px 0}.section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px}.section-title{font-size:36px;color:var(--primary)}.section-subtitle{color:var(--text-light);margin-top:8px}.view-all{display:flex;align-items:center;gap:8px;color:var(--primary);font-weight:600}
+        .categories-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px}.category-card{background:var(--bg-white);border-radius:var(--radius-lg);padding:25px 20px;text-align:center;cursor:pointer;transition:var(--transition);border:2px solid transparent}.category-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:var(--primary)}.category-img{width:100px;height:100px;object-fit:cover;border-radius:var(--radius-md);margin-bottom:15px}.category-name{font-weight:600;font-size:16px;margin-bottom:5px}.category-count{font-size:13px;color:var(--text-light)}
+        .products{padding:60px 0;background:var(--bg-white)}.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:25px}
+        .product-card{background:var(--bg-cream);border-radius:var(--radius-lg);overflow:hidden;transition:var(--transition);position:relative}.product-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg)}
+        .product-badge{position:absolute;top:15px;left:15px;display:flex;flex-direction:column;gap:5px;z-index:2}.badge{padding:5px 12px;border-radius:50px;font-size:11px;font-weight:700;text-transform:uppercase}.badge.bestseller{background:var(--accent);color:var(--primary-dark)}.badge.new{background:var(--success);color:white}.badge.discount{background:var(--error);color:white}.badge.organic{background:var(--primary);color:white}.badge.nonveg{background:#E74C3C;color:white}.badge.veg{background:#27AE60;color:white}
+        .product-image{height:200px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f5f5f5 0%,#e8e8e8 100%);overflow:hidden}.product-image img{width:100%;height:100%;object-fit:cover}
+        .product-info{padding:20px}.product-category{font-size:12px;color:var(--primary);font-weight:600;text-transform:uppercase;margin-bottom:8px}.product-name{font-size:18px;font-weight:600;margin-bottom:8px}.product-price{font-size:22px;font-weight:700;color:var(--primary);margin-bottom:15px}
+        .add-to-cart{width:100%;padding:14px;background:var(--primary);color:white;border-radius:var(--radius-md);font-size:15px;font-weight:600;transition:var(--transition)}.add-to-cart:hover{background:var(--primary-dark)}
+        .footer{background:var(--primary-dark);color:white;padding:60px 0 30px}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}.footer-brand .logo-text{color:white;margin-bottom:15px}.footer-brand p{color:rgba(255,255,255,0.7);font-size:14px}.footer-column h4{font-size:16px;margin-bottom:20px;color:var(--accent)}.footer-column ul{list-style:none}.footer-column li{margin-bottom:12px}.footer-column a{color:rgba(255,255,255,0.7);font-size:14px}.footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding-top:30px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px}.footer-bottom p{font-size:14px;color:rgba(255,255,255,0.7)}
+        .cart-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;opacity:0;visibility:hidden;transition:var(--transition)}.cart-overlay.active{opacity:1;visibility:visible}
+        .cart-sidebar{position:fixed;top:0;right:-450px;width:450px;max-width:100%;height:100%;background:var(--bg-white);z-index:10000;transition:var(--transition);display:flex;flex-direction:column}.cart-sidebar.active{right:0}
+        .cart-header{padding:20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}.cart-header h3{font-size:20px}.cart-close{width:36px;height:36px;background:var(--bg-cream);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer}
+        .cart-wallet-bar{background:linear-gradient(135deg,var(--success) 0%,#219150 100%);color:white;padding:12px 20px;display:flex;justify-content:space-between;align-items:center}.cart-wallet-bar.empty{background:linear-gradient(135deg,#FF6B6B 0%,#FF8E53 100%);cursor:pointer}
+        .cart-items{flex:1;overflow-y:auto;padding:20px}.cart-empty{text-align:center;padding:40px 20px;color:var(--text-light)}.cart-empty-icon{font-size:50px;margin-bottom:15px}
+        .cart-item{display:flex;gap:15px;padding:15px 0;border-bottom:1px solid var(--border)}.cart-item-img{width:70px;height:70px;background:var(--bg-cream);border-radius:var(--radius-md);overflow:hidden}.cart-item-img img{width:100%;height:100%;object-fit:cover}.cart-item-details{flex:1}.cart-item-name{font-weight:600;margin-bottom:5px;font-size:14px}.cart-item-price{color:var(--primary);font-weight:700}.cart-item-remove{color:var(--error);font-size:12px;cursor:pointer;margin-top:5px}.cart-item-qty{display:flex;align-items:center;gap:8px}.qty-btn{width:28px;height:28px;background:var(--bg-cream);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer}
+        .cart-footer{padding:20px;border-top:1px solid var(--border);background:var(--bg-cream)}.cart-summary{margin-bottom:15px}.cart-row{display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px}.cart-row.total{font-size:18px;font-weight:700;padding-top:10px;border-top:1px solid var(--border)}.cart-row.wallet{color:var(--success)}
+        .checkout-btn{width:100%;padding:16px;background:var(--primary);color:white;border-radius:var(--radius-md);font-size:16px;font-weight:700}.checkout-btn:hover{background:var(--primary-dark)}
+        .checkout-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:20000;display:none;align-items:center;justify-content:center}.checkout-modal.show{display:flex}.checkout-content{background:white;border-radius:var(--radius-lg);padding:40px;text-align:center;max-width:400px}.checkout-content h2{color:var(--success);margin-bottom:20px}.checkout-content .order-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.checkout-content .btn{margin-top:20px;padding:14px 30px;background:var(--primary);color:white;border:none;border-radius:var(--radius-md);font-weight:600;cursor:pointer}
+        .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--primary);color:white;padding:16px 30px;border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);z-index:30000;opacity:0;transition:var(--transition);display:flex;align-items:center;gap:10px}.toast.show{transform:translateX(-50%) translateY(0);opacity:1}.toast.success{background:var(--success)}.toast.error{background:var(--error)}
+        @media(max-width:1024px){.hero-title{font-size:36px}.hero-image{font-size:120px}.features-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:768px){.header-top .container{flex-direction:column}.search-bar{max-width:100%;order:3;margin-top:10px}.nav-list{display:none}.hero-content{flex-direction:column;text-align:center}.hero-image{display:none}.features-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.products-grid{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+    <div class="announcement-bar">🎉 Free Shipping on orders above <span>₹499</span> | Use code <span>PICKLE20</span> for 20% off</div>
+    <header class="header">
+        <div class="header-top">
+            <div class="container">
+                <a href="#" class="logo"><div class="logo-icon">🥒</div><div class="logo-text">Sea Salt<span>Pickles</span></div></a>
+                <div class="search-bar"><input type="text" id="searchInput" placeholder="Search pickles, podis, masalas..." onkeyup="searchProducts()"><button onclick="searchProducts()">🔍</button></div>
+                <div class="header-actions">
+                    <!-- ========== SPIN WHEEL BUTTON - START ========== -->
+                    <button class="spin-btn" onclick="openSpinModal()">🎡 Spin & Win</button>
+                    <!-- ========== SPIN WHEEL BUTTON - END ========== -->
+                    <button class="header-btn primary cart-btn" onclick="openCart()">🛒 Cart <span class="cart-count" id="cartCount">0</span><span class="wallet-badge" id="walletBadge">₹0</span></button>
+                </div>
+            </div>
+        </div>
+        <nav class="nav"><div class="container"><ul class="nav-list" id="navList"><li><a href="#" class="active">Home</a></li><li><a href="#categories">Categories</a></li><li><a href="#products">Products</a></li><li><a href="#footer">Contact</a></li></ul></div></nav>
+    </header>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <span class="hero-badge">🏆 #1 Rated Pickle Brand</span>
+                    <h1 class="hero-title">Authentic Telugu Pickles & Podis</h1>
+                    <p class="hero-desc">Experience the rich flavors of Andhra Pradesh with our handcrafted pickles made from traditional recipes passed down through generations.</p>
+                    <div class="hero-buttons">
+                        <a href="#products" class="hero-btn primary">Shop Now</a>
+                        <!-- ========== SPIN WHEEL HERO BUTTON - START ========== -->
+                        <button class="hero-btn outline" onclick="openSpinModal()">🎡 Spin & Win ₹500</button>
+                        <!-- ========== SPIN WHEEL HERO BUTTON - END ========== -->
+                    </div>
+                </div>
+                <div class="hero-image">🥭</div>
+            </div>
+        </div>
+    </section>
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-item"><div class="feature-icon">🚚</div><div class="feature-text"><h4>Free Delivery</h4><p>On orders above ₹499</p></div></div>
+                <div class="feature-item"><div class="feature-icon">🌿</div><div class="feature-text"><h4>100% Natural</h4><p>No preservatives added</p></div></div>
+                <div class="feature-item"><div class="feature-icon">👨‍🍳</div><div class="feature-text"><h4>Traditional Recipes</h4><p>Authentic Telugu taste</p></div></div>
+                <!-- ========== SPIN WHEEL FEATURE - START ========== -->
+                <div class="feature-item" onclick="openSpinModal()"><div class="feature-icon">🎡</div><div class="feature-text"><h4>Spin & Win ₹500</h4><p>Try your luck today!</p></div></div>
+                <!-- ========== SPIN WHEEL FEATURE - END ========== -->
+            </div>
+        </div>
+    </section>
+    <section class="categories" id="categories">
+        <div class="container">
+            <div class="section-header"><div><h2 class="section-title">Shop by Category</h2><p class="section-subtitle">Explore our wide range of authentic pickles and condiments</p></div><a href="#products" class="view-all">View All →</a></div>
+            <div class="categories-grid" id="categoriesGrid"></div>
+        </div>
+    </section>
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-header"><div><h2 class="section-title">Our Products</h2><p class="section-subtitle">Handcrafted with love, delivered with care</p></div></div>
+            <div class="products-grid" id="productsGrid"></div>
+        </div>
+    </section>
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand"><div class="logo-text">Sea Salt<span>Pickles</span></div><p>Bringing authentic Telugu flavors to your doorstep. Our pickles are made with love, tradition, and the finest ingredients.</p></div>
+                <div class="footer-column"><h4>Quick Links</h4><ul><li><a href="#">About Us</a></li><li><a href="#products">Products</a></li><li><a href="#">Bulk Orders</a></li></ul></div>
+                <div class="footer-column"><h4>Support</h4><ul><li><a href="#">Contact Us</a></li><li><a href="#">FAQs</a></li><li><a href="#">Shipping</a></li></ul></div>
+                <div class="footer-column"><h4>Contact</h4><ul><li><a href="mailto:hello@seasaltpickles.com">hello@seasaltpickles.com</a></li><li><a href="tel:+919876543210">+91 98765 43210</a></li><li>Hyderabad, Telangana</li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>© 2025 Sea Salt Pickles. All rights reserved.</p><p>Made with ❤️ in Andhra Pradesh</p></div>
+        </div>
+    </footer>
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header"><h3>🛒 Your Cart (<span id="cartItemCount">0</span>)</h3><div class="cart-close" onclick="closeCart()">✕</div></div>
+        <div class="cart-wallet-bar" id="cartWalletBar"><div><strong>💰 Wallet Balance</strong><div id="cartWalletAmt">₹0</div></div><span id="walletCta" onclick="openSpinModal()">🎡 Spin to Win!</span></div>
+        <div class="cart-items" id="cartItems"><div class="cart-empty"><div class="cart-empty-icon">🛒</div><h4>Your cart is empty</h4><p>Add some delicious pickles!</p></div></div>
+        <div class="cart-footer" id="cartFooter" style="display:none">
+            <div class="cart-summary">
+                <div class="cart-row"><span>Subtotal</span><span id="cartSubtotal">₹0</span></div>
+                <div class="cart-row wallet" id="walletRow" style="display:none"><span>Wallet Applied</span><span id="walletApplied">-₹0</span></div>
+                <div class="cart-row total"><span>Total</span><span id="cartTotal">₹0</span></div>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+    <!-- ========== SPIN WHEEL MODAL - START (Delete to remove spin feature) ========== -->
+    <div class="spin-overlay" id="spinOverlay">
+        <div class="spin-modal">
+            <button class="spin-close" onclick="closeSpinModal()">✕</button>
+            <h2 class="spin-title">🎡 Spin & Win!</h2>
+            <p class="spin-subtitle">Enter your details for a chance to win wallet credit!</p>
+            <div id="spinForm">
+                <input type="text" class="spin-input" id="userName" placeholder="Your Name">
+                <div class="spin-error" id="nameError">Please enter your name</div>
+                <input type="tel" class="spin-input" id="userPhone" placeholder="10-digit Phone Number" maxlength="10">
+                <div class="spin-error" id="phoneError">Please enter valid 10-digit number</div>
+                <button class="spin-submit" onclick="validateAndSpin()">Continue to Spin →</button>
+            </div>
+            <div class="already-played" id="alreadyPlayed"><h3>🎯 You've Already Played!</h3><p>Each phone number can only spin once.</p></div>
+            <div class="wheel-area" id="wheelArea">
+                <div class="wheel-container"><div class="wheel-pointer"></div><div class="wheel" id="wheel"></div><div class="wheel-center">🎯</div></div>
+                <button class="spin-wheel-btn" id="spinBtn" onclick="spinWheel()" disabled>🎰 SPIN NOW!</button>
+                <p id="spinStatus" style="color:#B8B8D1;margin-top:15px"></p>
+            </div>
+            <div class="spin-result win" id="winResult"><h3>🎉 Congratulations!</h3><p>You won ₹500 wallet credit!</p></div>
+            <div class="spin-result" id="loseResult"><h3>😔 Better Luck Next Time!</h3><p>Check out our amazing products!</p></div>
+        </div>
+    </div>
+    <!-- ========== SPIN WHEEL MODAL - END ========== -->
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-content">
+            <h2>🎉 Order Confirmed!</h2>
+            <div class="order-row"><span>Order Total</span><span id="orderTotal">₹0</span></div>
+            <div class="order-row" id="orderWalletRow" style="display:none"><span>Wallet Used</span><span id="orderWalletUsed">-₹0</span></div>
+            <div class="order-row"><span>Amount Paid</span><span id="orderPaid">₹0</span></div>
+            <div class="order-row"><span>Wallet Balance</span><span id="orderWalletLeft">₹0</span></div>
+            <button class="btn" onclick="closeCheckoutModal()">Continue Shopping</button>
+        </div>
+    </div>
+    <div class="toast" id="toast"><span id="toastMsg">Message</span></div>
+<script>
+// ╔══════════════════════════════════════════════════════════════════════════════╗
+// ║  🎡 SPIN WHEEL CONFIGURATION - MODIFY VALUES HERE                            ║
+// ╠══════════════════════════════════════════════════════════════════════════════╣
+// ║  💰 WALLET_PRIZE = 500     → Change winning amount (100, 250, 500, 1000)     ║
+// ║  🎲 SPIN_CYCLE = 20        → 1 in X wins (10=10%, 20=5%, 50=2%, 100=1%)      ║
+// ╚══════════════════════════════════════════════════════════════════════════════╝
+const WALLET_PRIZE = 500;
+const SPIN_CYCLE = 20;
+
+// ========== SPIN WHEEL CODE - START ==========
+let isSpinning=false,spinUser=null,cart=[];
+const getWallet=()=>parseInt(localStorage.getItem('ssp_wallet')||'0');
+const setWallet=a=>{localStorage.setItem('ssp_wallet',a);updateWalletUI();};
+const getSpinData=()=>JSON.parse(localStorage.getItem('ssp_spinData')||'{"total":0,"lastWin":0,"users":[]}');
+const setSpinData=d=>localStorage.setItem('ssp_spinData',JSON.stringify(d));
+const hasPlayed=p=>getSpinData().users.includes(p);
+function shouldWin(){const d=getSpinData(),s=d.total-d.lastWin;if(s>=SPIN_CYCLE-1)return true;return Math.random()<(1/(SPIN_CYCLE-s));}
+function openSpinModal(){document.getElementById('spinOverlay').classList.add('active');const s=localStorage.getItem('ssp_phone');if(s&&hasPlayed(s)){showAlreadyPlayed();}else{resetSpinModal();}}
+function closeSpinModal(){document.getElementById('spinOverlay').classList.remove('active');}
+function resetSpinModal(){document.getElementById('spinForm').style.display='block';document.getElementById('alreadyPlayed').classList.remove('show');document.getElementById('winResult').classList.remove('show');document.getElementById('loseResult').classList.remove('show');document.getElementById('wheelArea').classList.remove('active');document.getElementById('spinBtn').disabled=true;document.getElementById('spinStatus').textContent='';document.getElementById('wheel').style.transform='rotate(0deg)';}
+function showAlreadyPlayed(){document.getElementById('spinForm').style.display='none';document.getElementById('alreadyPlayed').classList.add('show');document.getElementById('spinBtn').disabled=true;}
+function validateAndSpin(){const n=document.getElementById('userName').value.trim(),p=document.getElementById('userPhone').value.trim();document.getElementById('nameError').classList.remove('show');document.getElementById('phoneError').classList.remove('show');let v=true;if(!n||n.length<2){document.getElementById('nameError').classList.add('show');v=false;}if(!/^\d{10}$/.test(p)){document.getElementById('phoneError').classList.add('show');v=false;}if(!v)return;if(hasPlayed(p)){document.getElementById('phoneError').textContent='This number already used!';document.getElementById('phoneError').classList.add('show');return;}spinUser={name:n,phone:p};localStorage.setItem('ssp_phone',p);localStorage.setItem('ssp_name',n);document.getElementById('spinForm').style.display='none';document.getElementById('wheelArea').classList.add('active');document.getElementById('spinBtn').disabled=false;document.getElementById('spinStatus').textContent='Good luck, '+n+'! 🍀';toast('Ready to spin! Good luck! 🍀','success');}
+function spinWheel(){if(isSpinning||!spinUser)return;isSpinning=true;const w=document.getElementById('wheel'),b=document.getElementById('spinBtn');b.disabled=true;b.textContent='Spinning...';document.getElementById('spinStatus').textContent='Spinning... 🎡';const win=shouldWin(),r=1800+(win?45:135)+Math.random()*30;w.style.transform='rotate('+r+'deg)';setTimeout(()=>{isSpinning=false;const d=getSpinData();d.users.push(spinUser.phone);d.total++;if(win)d.lastWin=d.total;setSpinData(d);if(win){setWallet(getWallet()+WALLET_PRIZE);document.getElementById('winResult').classList.add('show');document.getElementById('spinStatus').textContent='🎉 You won ₹'+WALLET_PRIZE+'!';createConfetti();toast('Congratulations! ₹'+WALLET_PRIZE+' added to wallet!','success');}else{document.getElementById('loseResult').classList.add('show');document.getElementById('spinStatus').textContent='Better luck next time!';toast('Not this time! Try our delicious pickles!','error');}},5000);}
+function createConfetti(){const c=['#FFD700','#FF6B6B','#4ECDC4','#45B7D1','#96CEB4','#FFEAA7','#DDA0DD','#8B4513'];for(let i=0;i<100;i++){const e=document.createElement('div');e.className='confetti';e.style.left=Math.random()*100+'vw';e.style.background=c[Math.floor(Math.random()*c.length)];e.style.animationDelay=Math.random()*2+'s';e.style.animationDuration=(Math.random()*2+2)+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),5000);}}
+function updateWalletUI(){const b=getWallet(),badge=document.getElementById('walletBadge'),amt=document.getElementById('cartWalletAmt'),cta=document.getElementById('walletCta'),bar=document.getElementById('cartWalletBar');if(b>0){badge.textContent='₹'+b;badge.classList.add('active');amt.textContent='₹'+b;cta.style.display='none';bar.classList.remove('empty');}else{badge.classList.remove('active');amt.textContent='₹0';cta.style.display='block';cta.textContent=hasPlayed(localStorage.getItem('ssp_phone')||'')?'Already Played':'🎡 Spin to Win!';bar.classList.add('empty');}}
+document.getElementById('spinOverlay').addEventListener('click',function(e){if(e.target===this)closeSpinModal();});
+document.getElementById('userPhone').addEventListener('input',function(){this.value=this.value.replace(/\D/g,'').slice(0,10);});
+// ========== SPIN WHEEL CODE - END ==========
+
+// =====================================================
+// PRODUCTS DATA - ALL 35 VISIBLE PRODUCTS FROM CSV
+// =====================================================
+const products = [
+    {id:1,name:"Dry Fruit Laddu",category:"snacks",tag:"Healthy",price:350,image:"https://static.wixstatic.com/media/163af4_e6a395f4ac2549f5a77ad25f2ec23b60~mv2.jpg"},
+    {id:2,name:"Turmeric Powder",category:"masala",tag:"Traditional",price:125,image:"https://static.wixstatic.com/media/163af4_76e4b86c589c416fb6d30ecdf540fd66~mv2.jpg"},
+    {id:3,name:"Kura Karam",category:"masala",tag:"Chilli Powder",price:300,image:"https://static.wixstatic.com/media/163af4_a97d93f9ec1a4dfb95de4954b433d257~mv2.jpg"},
+    {id:4,name:"Mutton Kheema Pickle",category:"nonveg",tag:"Telugu Spl",price:1000,image:"https://static.wixstatic.com/media/53b0e3_3be3a6d6eeb44946828b9b967a645931~mv2.jpg"},
+    {id:5,name:"Gongura Prawns",category:"nonveg",tag:"Telugu Spl",price:850,image:"https://static.wixstatic.com/media/53b0e3_6a2ee4df6cfe45bfa571742350b0a551~mv2.png"},
+    {id:6,name:"Gongura Chicken Boneless",category:"nonveg",tag:"Best in Class",price:630,image:"https://static.wixstatic.com/media/53b0e3_99a38423b54b4327828de1ef6b257a46~mv2.png"},
+    {id:7,name:"Flax Seeds Laddu",category:"snacks",tag:"Healthy",price:220,image:"https://static.wixstatic.com/media/163af4_9b4713713ca44be29f4b3cedd665d38c~mv2.jpg"},
+    {id:8,name:"Janthikalu",category:"snacks",tag:"Telugu Spl",price:150,image:"https://static.wixstatic.com/media/163af4_a2137bc79ea74d20af5fd90b82f88e3b~mv2.jpg"},
+    {id:9,name:"Chekkalu - Pachi Karam & Sago",category:"snacks",tag:"Sago Spl",price:170,image:"https://static.wixstatic.com/media/163af4_281785428c1a4f1ebb5821acf8cbd370~mv2.jpg"},
+    {id:10,name:"Chekkalu",category:"snacks",tag:"Peanut Spl",price:150,image:"https://static.wixstatic.com/media/163af4_ba68548805f943cb9e2e8f6fc31f57f3~mv2.jpg"},
+    {id:11,name:"Munagaaku Karam",category:"masala",tag:"Podis",price:80,image:"https://static.wixstatic.com/media/163af4_8e4278b579364734ba7ff3650898bcf8~mv2.jpg"},
+    {id:12,name:"Pudina Karam",category:"masala",tag:"Podis",price:80,image:"https://static.wixstatic.com/media/163af4_625bd2ee00b7403aa27e238f8f270290~mv2.jpg"},
+    {id:13,name:"Karivepaku Karam",category:"masala",tag:"Podis",price:80,image:"https://static.wixstatic.com/media/163af4_1f3cc39a9ba543ed881feb8ae3a27ce0~mv2.jpg"},
+    {id:14,name:"Chicken + Coriander",category:"combos",tag:"Combo",price:800,image:"https://static.wixstatic.com/media/163af4_7dc576230bc64852b4861a7bcb77015c~mv2.jpg"},
+    {id:15,name:"Avakaya + Tomato",category:"combos",tag:"Combo",price:550,image:"https://static.wixstatic.com/media/163af4_a5be29aba0f7461583b94fe4daa4f830~mv2.jpg"},
+    {id:16,name:"Kakarakaya Karam",category:"masala",tag:"Podis",price:80,image:"https://static.wixstatic.com/media/163af4_058b8624a4a0474e973d90b19e119a1a~mv2.jpg"},
+    {id:17,name:"Nalla Karam",category:"masala",tag:"Podis",price:80,image:"https://static.wixstatic.com/media/163af4_b1dc36c9300848e8b343b93fb28488c3~mv2.jpg"},
+    {id:18,name:"Garam Masala",category:"masala",tag:"All you need",price:80,image:"https://static.wixstatic.com/media/163af4_02d29cde3ae1441fb01b32dcde60046f~mv2.jpg"},
+    {id:19,name:"Pandu Mirchi Pachadi",category:"veg",tag:"South Special",price:300,image:"https://static.wixstatic.com/media/53b0e3_1383b71f1c1541f78e702c5364c59f09~mv2.jpg"},
+    {id:20,name:"Biryani Masala (Black Masala)",category:"masala",tag:"Biryani Spl",price:200,image:"https://static.wixstatic.com/media/163af4_7f81a30887664bba8fc94f652c1dd5e1~mv2.jpg"},
+    {id:21,name:"Kara Podi",category:"masala",tag:"Podis",price:80,image:"https://static.wixstatic.com/media/163af4_a2bfe3454c4e456cb2b6aedc429a3484~mv2.jpg"},
+    {id:22,name:"Chicken Pickle Boneless",category:"nonveg",tag:"Best in Class",price:630,image:"https://static.wixstatic.com/media/53b0e3_bd4b8d8643724c3dbbded34896cc40c4~mv2.jpg"},
+    {id:23,name:"Gongura Nilva Pachadi",category:"veg",tag:"Herbal",price:330,image:"https://static.wixstatic.com/media/53b0e3_d3504025073140cab435c56935e0a2ef~mv2.jpg"},
+    {id:24,name:"Chicken Pickle with Bone",category:"nonveg",tag:"All time favourite",price:540,image:"https://static.wixstatic.com/media/53b0e3_4a25ae4fca044360a5317828d4bf9dc3~mv2.jpg"},
+    {id:25,name:"Coriander Nilva Pachadi",category:"veg",tag:"Herbal",price:330,image:"https://static.wixstatic.com/media/53b0e3_df7b35b3764a4fb0888e24e5e0e7facb~mv2.jpg"},
+    {id:26,name:"Dhaniyala Maagaya",category:"veg",tag:"Raw Mango",price:330,image:"https://static.wixstatic.com/media/53b0e3_44f8a3dc204f49c781d426335bf62ad8~mv2.jpg"},
+    {id:27,name:"Amla Patchadi",category:"veg",tag:"Herbal",price:330,image:"https://static.wixstatic.com/media/163af4_23da098b073749529dca236bbdb68880~mv2.jpg"},
+    {id:28,name:"Ginger Pickle",category:"veg",tag:"Herbal",price:330,image:"https://static.wixstatic.com/media/53b0e3_fd749ebdc8b345a0843acca96e7f6114~mv2.jpg"},
+    {id:29,name:"Avakaya",category:"veg",tag:"Traditional",price:330,image:"https://static.wixstatic.com/media/163af4_58038c71b77b4b8eae82c58c8e4f9b5c~mv2.jpg"},
+    {id:30,name:"Prawn Pickle",category:"nonveg",tag:"Straight from Godavari",price:800,image:"https://static.wixstatic.com/media/53b0e3_52f7a2f8bf9b4e95975f93aa19b63c26~mv2.jpg"},
+    {id:31,name:"Tomato Pickle",category:"veg",tag:"South Special",price:300,image:"https://static.wixstatic.com/media/53b0e3_315289d09db24d65a1b33ecab2a2a8e9~mv2.jpg"},
+    {id:32,name:"Mint Pickle",category:"veg",tag:"Herbal",price:330,image:"https://static.wixstatic.com/media/53b0e3_f21bc86babaf464dbf6d199bdaa3de15~mv2.jpg"},
+    {id:33,name:"Maagaya",category:"veg",tag:"Traditional",price:330,image:"https://static.wixstatic.com/media/53b0e3_ad2fb569d13446b8a80e30ec17ec1c2d~mv2.jpg"},
+    {id:34,name:"Lemon Pickle",category:"veg",tag:"Freshly Made",price:330,image:"https://static.wixstatic.com/media/163af4_4b0acd7a2e6048bd8f740d24f8f33a6a~mv2.jpg"},
+    {id:35,name:"Mixed Vegetable Avakaya",category:"veg",tag:"Fresh Vegetables",price:300,image:"https://static.wixstatic.com/media/53b0e3_cf6497e892ba4f1b9ecc11129f7b6325~mv2.jpg"}
+];
+
+// CATEGORIES DATA - FROM CSV
+const categories = [
+    {key:"nonveg",name:"Non Veg Pickles",count:6,image:"https://static.wixstatic.com/media/53b0e3_4a25ae4fca044360a5317828d4bf9dc3~mv2.jpg"},
+    {key:"veg",name:"Vegetarian Pickles",count:12,image:"https://static.wixstatic.com/media/163af4_58038c71b77b4b8eae82c58c8e4f9b5c~mv2.jpg"},
+    {key:"masala",name:"Masalas & Karam Podis",count:10,image:"https://static.wixstatic.com/media/163af4_a97d93f9ec1a4dfb95de4954b433d257~mv2.jpg"},
+    {key:"snacks",name:"Sweets & Snacks",count:5,image:"https://static.wixstatic.com/media/163af4_e6a395f4ac2549f5a77ad25f2ec23b60~mv2.jpg"},
+    {key:"combos",name:"Combos",count:2,image:"https://static.wixstatic.com/media/163af4_7dc576230bc64852b4861a7bcb77015c~mv2.jpg"}
+];
+
+// Initialize
+document.addEventListener('DOMContentLoaded',()=>{renderCategories();renderProducts('all');updateWalletUI();loadCart();});
+
+function renderCategories(){
+    document.getElementById('categoriesGrid').innerHTML=categories.map(c=>
+        '<div class="category-card" onclick="filterCategory(\''+c.key+'\')">'+
+        '<img src="'+c.image+'" alt="'+c.name+'" class="category-img">'+
+        '<div class="category-name">'+c.name+'</div>'+
+        '<div class="category-count">'+c.count+' Products</div></div>'
+    ).join('');
+}
+
+function renderProducts(f){
+    const p=f==='all'?products:products.filter(x=>x.category===f);
+    document.getElementById('productsGrid').innerHTML=p.map(x=>
+        '<div class="product-card">'+
+        '<div class="product-badge"><span class="badge '+(x.category==='nonveg'?'nonveg':'veg')+'">'+(x.category==='nonveg'?'Non Veg':'Veg')+'</span></div>'+
+        '<div class="product-image"><img src="'+x.image+'" alt="'+x.name+'" loading="lazy"></div>'+
+        '<div class="product-info">'+
+        '<div class="product-category">'+x.tag+'</div>'+
+        '<h3 class="product-name">'+x.name+'</h3>'+
+        '<div class="product-price">₹'+x.price+'</div>'+
+        '<button class="add-to-cart" onclick="addToCart('+x.id+')">🛒 Add to Cart</button>'+
+        '</div></div>'
+    ).join('');
+}
+
+function filterCategory(k){renderProducts(k);document.getElementById('products').scrollIntoView({behavior:'smooth'});}
+function searchProducts(){const t=document.getElementById('searchInput').value.toLowerCase();const p=products.filter(x=>x.name.toLowerCase().includes(t)||x.tag.toLowerCase().includes(t));document.getElementById('productsGrid').innerHTML=p.length?p.map(x=>'<div class="product-card"><div class="product-badge"><span class="badge '+(x.category==='nonveg'?'nonveg':'veg')+'">'+(x.category==='nonveg'?'Non Veg':'Veg')+'</span></div><div class="product-image"><img src="'+x.image+'" alt="'+x.name+'"></div><div class="product-info"><div class="product-category">'+x.tag+'</div><h3 class="product-name">'+x.name+'</h3><div class="product-price">₹'+x.price+'</div><button class="add-to-cart" onclick="addToCart('+x.id+')">🛒 Add to Cart</button></div></div>').join(''):'<div style="grid-column:1/-1;text-align:center;padding:50px;"><h3>No products found</h3></div>';}
+
+// Cart Functions
+function loadCart(){const s=localStorage.getItem('ssp_cart');if(s){cart=JSON.parse(s);updateCartUI();}}
+function saveCart(){localStorage.setItem('ssp_cart',JSON.stringify(cart));}
+function addToCart(id){const p=products.find(x=>x.id===id),e=cart.find(x=>x.id===id);if(e)e.qty++;else cart.push({...p,qty:1});saveCart();updateCartUI();toast(p.name+' added to cart!','success');}
+function removeFromCart(id){cart=cart.filter(x=>x.id!==id);saveCart();updateCartUI();}
+function updateQty(id,d){const i=cart.find(x=>x.id===id);if(i){i.qty+=d;if(i.qty<=0)cart=cart.filter(x=>x.id!==id);saveCart();updateCartUI();}}
+function updateCartUI(){const c=cart.reduce((s,i)=>s+i.qty,0),sub=cart.reduce((s,i)=>s+i.price*i.qty,0),w=getWallet(),wa=Math.min(w,sub),t=sub-wa;document.getElementById('cartCount').textContent=c;document.getElementById('cartItemCount').textContent=c;document.getElementById('cartSubtotal').textContent='₹'+sub;document.getElementById('cartTotal').textContent='₹'+t;const wr=document.getElementById('walletRow');if(w>0&&sub>0){wr.style.display='flex';document.getElementById('walletApplied').textContent='-₹'+wa;}else{wr.style.display='none';}const items=document.getElementById('cartItems'),footer=document.getElementById('cartFooter');if(cart.length===0){items.innerHTML='<div class="cart-empty"><div class="cart-empty-icon">🛒</div><h4>Your cart is empty</h4><p>Add some delicious pickles!</p></div>';footer.style.display='none';}else{items.innerHTML=cart.map(i=>'<div class="cart-item"><div class="cart-item-img"><img src="'+i.image+'" alt="'+i.name+'"></div><div class="cart-item-details"><div class="cart-item-name">'+i.name+'</div><div class="cart-item-price">₹'+(i.price*i.qty)+'</div><div class="cart-item-remove" onclick="removeFromCart('+i.id+')">Remove</div></div><div class="cart-item-qty"><button class="qty-btn" onclick="updateQty('+i.id+',-1)">−</button><span>'+i.qty+'</span><button class="qty-btn" onclick="updateQty('+i.id+',1)">+</button></div></div>').join('');footer.style.display='block';}updateWalletUI();}
+function openCart(){document.getElementById('cartOverlay').classList.add('active');document.getElementById('cartSidebar').classList.add('active');}
+function closeCart(){document.getElementById('cartOverlay').classList.remove('active');document.getElementById('cartSidebar').classList.remove('active');}
+function checkout(){if(cart.length===0)return;const sub=cart.reduce((s,i)=>s+i.price*i.qty,0),w=getWallet(),wu=Math.min(w,sub),paid=sub-wu;if(wu>0)setWallet(w-wu);document.getElementById('orderTotal').textContent='₹'+sub;if(wu>0){document.getElementById('orderWalletRow').style.display='flex';document.getElementById('orderWalletUsed').textContent='-₹'+wu;}else{document.getElementById('orderWalletRow').style.display='none';}document.getElementById('orderPaid').textContent='₹'+paid;document.getElementById('orderWalletLeft').textContent='₹'+getWallet();document.getElementById('checkoutModal').classList.add('show');cart=[];saveCart();updateCartUI();closeCart();}
+function closeCheckoutModal(){document.getElementById('checkoutModal').classList.remove('show');}
+function toast(m,t=''){const e=document.getElementById('toast');document.getElementById('toastMsg').textContent=m;e.className='toast show '+t;setTimeout(()=>e.classList.remove('show'),3000);}
+console.log('🥒 Sea Salt Pickles | Products: '+products.length+' | Categories: '+categories.length+' | 🎡 Spin: 1 in '+SPIN_CYCLE+' win ₹'+WALLET_PRIZE);
+</script>
+</body>
+</html>
