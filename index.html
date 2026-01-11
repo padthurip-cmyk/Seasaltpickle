@@ -1,1 +1,2323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#8B4513">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Sea Salt Pickles | Premium Authentic Pickles</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ==================== GLOBAL STYLES ==================== */
+        :root {
+            --primary: #8B4513;
+            --primary-dark: #6B3410;
+            --secondary: #D2691E;
+            --accent: #FFD700;
+            --success: #27AE60;
+            --danger: #E74C3C;
+            --bg-dark: #1a1a1a;
+            --bg-card: #2d2d2d;
+            --bg-light: #3d3d3d;
+            --text-white: #FFFFFF;
+            --text-light: #E0E0E0;
+            --text-muted: #999999;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-white);
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            padding-bottom: 80px;
+        }
+
+        /* ==================== HEADER ==================== */
+        .header {
+            position: sticky;
+            top: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 16px 20px;
+            box-shadow: var(--shadow);
+            z-index: 999;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--text-white);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+            font-size: 20px;
+        }
+
+        .icon-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wallet-display {
+            background: rgba(255, 215, 0, 0.15);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ==================== NAVIGATION ==================== */
+        .nav-desktop {
+            display: flex;
+            justify-content: center;
+            background: var(--bg-card);
+            padding: 12px 0;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 10px 24px;
+            background: transparent;
+            border: 2px solid transparent;
+            color: var(--text-light);
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        /* ==================== BOTTOM NAV (MOBILE) ==================== */
+        .bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-card);
+            border-top: 2px solid var(--primary);
+            padding: 8px 0;
+            padding-bottom: max(8px, env(safe-area-inset-bottom));
+            z-index: 1000;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .bottom-nav-items {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 12px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 12px;
+            font-family: inherit;
+        }
+
+        .bottom-nav-item.active {
+            color: var(--accent);
+        }
+
+        .bottom-nav-item span:first-child {
+            font-size: 24px;
+        }
+
+        /* ==================== PAGES ==================== */
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* ==================== SPIN LANDING PAGE ==================== */
+        .spin-landing {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1a0a 100%);
+        }
+
+        .spin-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .spin-header h1 {
+            font-size: 32px;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .spin-header p {
+            font-size: 18px;
+            color: var(--text-light);
+        }
+
+        .wheel-container {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            margin: 30px auto;
+        }
+
+        .wheel-pointer {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 40px solid var(--danger);
+            z-index: 10;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 0 0 12px var(--accent), 0 0 0 16px var(--primary), var(--shadow);
+            transition: transform 5s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+            background: conic-gradient(
+                from 0deg,
+                var(--accent) 0deg 60deg,
+                var(--secondary) 60deg 120deg,
+                var(--accent) 120deg 180deg,
+                var(--secondary) 180deg 240deg,
+                var(--accent) 240deg 300deg,
+                var(--secondary) 300deg 360deg
+            );
+        }
+
+        .wheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            z-index: 5;
+        }
+
+        .spin-controls {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .spin-btn {
+            padding: 16px 48px;
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+            border: none;
+            border-radius: 50px;
+            color: var(--bg-dark);
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            font-family: inherit;
+        }
+
+        .spin-btn:hover:not(:disabled) {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 12px 40px rgba(255, 215, 0, 0.4);
+        }
+
+        .spin-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .spin-result {
+            display: none;
+            text-align: center;
+            margin-top: 30px;
+            padding: 24px;
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .spin-result.show {
+            display: block;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .result-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .result-message {
+            font-size: 16px;
+            color: var(--text-light);
+        }
+
+        /* ==================== MODAL ==================== */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal.show {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            padding: 32px;
+            border-radius: var(--radius);
+            max-width: 400px;
+            width: 100%;
+            box-shadow: var(--shadow);
+            animation: scaleIn 0.3s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-header h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: var(--accent);
+        }
+
+        .modal-header p {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px;
+            background: var(--bg-dark);
+            border: 2px solid var(--bg-light);
+            border-radius: 8px;
+            color: var(--text-white);
+            font-size: 16px;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .error-msg {
+            color: var(--danger);
+            font-size: 13px;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .error-msg.show {
+            display: block;
+        }
+
+        /* ==================== HOME PAGE ==================== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 0 0 32px 32px;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 16px;
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 24px;
+        }
+
+        .hero-btn {
+            padding: 14px 32px;
+            background: var(--accent);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .hero-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(255, 215, 0, 0.4);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            padding: 24px;
+            border-radius: var(--radius);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: var(--accent);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        /* ==================== SHOP PAGE ==================== */
+        .shop-header {
+            margin-bottom: 24px;
+        }
+
+        .shop-header h1 {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .category-filter {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-bottom: 24px;
+        }
+
+        .category-filter::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .category-filter::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .category-btn {
+            padding: 10px 20px;
+            background: var(--bg-card);
+            border: 2px solid transparent;
+            color: var(--text-light);
+            border-radius: 20px;
+            cursor: pointer;
+            white-space: nowrap;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .category-btn:hover {
+            border-color: var(--primary);
+        }
+
+        .category-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: var(--bg-light);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .product-info {
+            padding: 16px;
+        }
+
+        .product-category {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-white);
+        }
+
+        .product-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-secondary {
+            flex: 1;
+            padding: 10px;
+            background: var(--bg-light);
+            border: 2px solid var(--primary);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+        }
+
+        .btn-add-cart {
+            flex: 2;
+            padding: 10px;
+            background: var(--primary);
+            border: none;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .btn-add-cart:hover {
+            background: var(--primary-dark);
+        }
+
+        /* ==================== PRODUCT DETAIL PAGE ==================== */
+        .product-detail {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .detail-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: var(--radius);
+            background: var(--bg-light);
+        }
+
+        .detail-info h1 {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .detail-category {
+            font-size: 14px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .detail-price {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .detail-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .variant-selector {
+            margin-bottom: 24px;
+        }
+
+        .variant-selector label {
+            display: block;
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .variant-options {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .variant-option {
+            padding: 10px 20px;
+            background: var(--bg-card);
+            border: 2px solid var(--bg-light);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+            color: var(--text-white);
+        }
+
+        .variant-option.active {
+            border-color: var(--accent);
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .quantity-selector label {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--bg-card);
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .qty-btn {
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            border: none;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 700;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .qty-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .qty-value {
+            font-size: 20px;
+            font-weight: 600;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .detail-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-large {
+            flex: 1;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .btn-buy-now {
+            background: var(--accent);
+            color: var(--bg-dark);
+            border: none;
+        }
+
+        .btn-buy-now:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-add-to-cart {
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .btn-add-to-cart:hover {
+            background: var(--primary-dark);
+        }
+
+        /* ==================== CART PAGE ==================== */
+        .cart-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .cart-empty-icon {
+            font-size: 80px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .cart-empty h2 {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .cart-empty p {
+            color: var(--text-light);
+            margin-bottom: 24px;
+        }
+
+        .cart-items {
+            margin-bottom: 24px;
+        }
+
+        .cart-item {
+            background: var(--bg-card);
+            padding: 16px;
+            border-radius: var(--radius);
+            margin-bottom: 16px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            background: var(--bg-light);
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-variant {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .cart-item-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .cart-item-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: flex-end;
+        }
+
+        .cart-qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-dark);
+            padding: 6px;
+            border-radius: 6px;
+        }
+
+        .cart-qty-btn {
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: inherit;
+        }
+
+        .cart-qty-value {
+            font-size: 16px;
+            font-weight: 600;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .cart-remove-btn {
+            background: none;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+            font-size: 14px;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .cart-remove-btn:hover {
+            color: #ff0000;
+        }
+
+        .cart-summary {
+            background: var(--bg-card);
+            padding: 24px;
+            border-radius: var(--radius);
+            margin-bottom: 24px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .summary-row.total {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+            padding-top: 12px;
+            border-top: 2px solid var(--bg-light);
+            margin-top: 12px;
+        }
+
+        .wallet-applied {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+            border: none;
+            border-radius: 8px;
+            color: var(--bg-dark);
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .checkout-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 215, 0, 0.4);
+        }
+
+        .checkout-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* ==================== ABOUT PAGE ==================== */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .about-hero h1 {
+            font-size: 36px;
+            margin-bottom: 16px;
+            color: var(--accent);
+        }
+
+        .about-hero p {
+            font-size: 18px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .about-section {
+            background: var(--bg-card);
+            padding: 32px;
+            border-radius: var(--radius);
+            margin-bottom: 24px;
+        }
+
+        .about-section h2 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: var(--accent);
+        }
+
+        .about-section p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        /* ==================== CONTACT PAGE ==================== */
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            background: var(--bg-card);
+            padding: 32px;
+            border-radius: var(--radius);
+            margin-bottom: 24px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding: 16px;
+            background: var(--bg-dark);
+            border-radius: 8px;
+        }
+
+        .contact-icon {
+            font-size: 32px;
+            color: var(--accent);
+        }
+
+        .contact-details h3 {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .contact-details p {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .contact-form {
+            background: var(--bg-card);
+            padding: 32px;
+            border-radius: var(--radius);
+        }
+
+        .contact-form h2 {
+            font-size: 24px;
+            margin-bottom: 24px;
+            color: var(--accent);
+        }
+
+        textarea.form-input {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* ==================== CONFETTI ==================== */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            position: absolute;
+            animation: confetti-fall 3s linear forwards;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .nav-desktop {
+                display: none;
+            }
+
+            .bottom-nav {
+                display: block;
+            }
+
+            body {
+                padding-bottom: 70px;
+            }
+
+            .detail-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .detail-image {
+                height: 300px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 16px;
+            }
+
+            .product-image {
+                height: 160px;
+            }
+
+            .product-info {
+                padding: 12px;
+            }
+
+            .product-name {
+                font-size: 15px;
+            }
+
+            .product-price {
+                font-size: 18px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .wallet-display {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .cart-item-controls {
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+        }
+
+        /* ==================== LOADING INDICATOR ==================== */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+            color: var(--text-light);
+        }
+
+        /* ==================== TOAST NOTIFICATION ==================== */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--bg-card);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            z-index: 10000;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success {
+            background: var(--success);
+        }
+
+        .toast.error {
+            background: var(--danger);
+        }
+    </style>
+</head>
+<body>
+    <!-- ==================== HEADER ==================== -->
+    <header class="header">
+        <a class="logo" onclick="navigateTo('home')">
+            <span>🌶️</span>
+            <span>Sea Salt Pickles</span>
+        </a>
+        <div class="header-icons">
+            <div class="wallet-display">
+                <span>💰</span>
+                <span id="walletAmount">₹0</span>
+            </div>
+            <button class="icon-btn" onclick="navigateTo('cart')">
+                <span>🛒</span>
+                <span class="badge" id="cartBadge">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ==================== DESKTOP NAVIGATION ==================== -->
+    <nav class="nav-desktop">
+        <button class="nav-btn active" onclick="navigateTo('home')" data-page="home">Home</button>
+        <button class="nav-btn" onclick="navigateTo('shop')" data-page="shop">Shop</button>
+        <button class="nav-btn" onclick="navigateTo('about')" data-page="about">About</button>
+        <button class="nav-btn" onclick="navigateTo('contact')" data-page="contact">Contact</button>
+        <button class="nav-btn" onclick="navigateTo('spin')" data-page="spin">🎡 Spin & Win</button>
+    </nav>
+
+    <!-- ==================== PAGES ==================== -->
+    
+    <!-- SPIN LANDING PAGE -->
+    <div id="spinPage" class="page">
+        <div class="spin-landing">
+            <div class="spin-header">
+                <h1>🎡 Spin & Win ₹500!</h1>
+                <p>Try your luck and win wallet credit</p>
+            </div>
+
+            <div class="wheel-container">
+                <div class="wheel-pointer"></div>
+                <div id="wheel" class="wheel">
+                    <div class="wheel-center">🎯</div>
+                </div>
+            </div>
+
+            <div class="spin-controls">
+                <button id="spinBtn" class="spin-btn" onclick="initiateSpin()">SPIN THE WHEEL</button>
+            </div>
+
+            <div id="spinResult" class="spin-result">
+                <div class="result-icon" id="resultIcon"></div>
+                <h2 class="result-title" id="resultTitle"></h2>
+                <p class="result-message" id="resultMessage"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOME PAGE -->
+    <div id="homePage" class="page active">
+        <div class="hero">
+            <h1>🌶️ Premium Authentic Pickles</h1>
+            <p>Traditional recipes, authentic taste</p>
+            <button class="hero-btn" onclick="navigateTo('shop')">Shop Now</button>
+        </div>
+
+        <div class="container">
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🥒</div>
+                    <h3>100% Natural</h3>
+                    <p>No artificial preservatives or colors</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏠</div>
+                    <h3>Homemade</h3>
+                    <p>Traditional recipes passed down generations</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Fast Delivery</h3>
+                    <p>Fresh pickles delivered to your door</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <h3>Premium Quality</h3>
+                    <p>Highest quality ingredients and taste</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SHOP PAGE -->
+    <div id="shopPage" class="page">
+        <div class="container">
+            <div class="shop-header">
+                <h1>Our Products</h1>
+            </div>
+
+            <div class="category-filter" id="categoryFilter">
+                <button class="category-btn active" onclick="filterCategory('all')">All</button>
+                <button class="category-btn" onclick="filterCategory('veg')">Veg Pickles</button>
+                <button class="category-btn" onclick="filterCategory('nonveg')">Non-Veg Pickles</button>
+                <button class="category-btn" onclick="filterCategory('masala')">Masalas & Podis</button>
+                <button class="category-btn" onclick="filterCategory('sweet')">Sweets & Snacks</button>
+                <button class="category-btn" onclick="filterCategory('combo')">Combos</button>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCT DETAIL PAGE -->
+    <div id="productDetailPage" class="page">
+        <div class="container">
+            <div class="product-detail">
+                <div class="detail-grid">
+                    <div>
+                        <img id="detailImage" class="detail-image" src="" alt="">
+                    </div>
+                    <div class="detail-info">
+                        <div class="detail-category" id="detailCategory"></div>
+                        <h1 id="detailName"></h1>
+                        <div class="detail-price" id="detailPrice"></div>
+                        <p class="detail-description" id="detailDescription"></p>
+
+                        <div class="variant-selector" id="variantSelector" style="display: none;">
+                            <label>Select Weight:</label>
+                            <div class="variant-options" id="variantOptions"></div>
+                        </div>
+
+                        <div class="quantity-selector">
+                            <label>Quantity:</label>
+                            <div class="quantity-controls">
+                                <button class="qty-btn" onclick="changeDetailQty(-1)">-</button>
+                                <span class="qty-value" id="detailQty">1</span>
+                                <button class="qty-btn" onclick="changeDetailQty(1)">+</button>
+                            </div>
+                        </div>
+
+                        <div class="detail-actions">
+                            <button class="btn-large btn-add-to-cart" onclick="addToCartFromDetail()">Add to Cart</button>
+                            <button class="btn-large btn-buy-now" onclick="buyNowFromDetail()">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART PAGE -->
+    <div id="cartPage" class="page">
+        <div class="container">
+            <div class="cart-container">
+                <h1>Shopping Cart</h1>
+                <div id="cartContent">
+                    <!-- Cart items will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="aboutPage" class="page">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-hero">
+                    <h1>About Sea Salt Pickles</h1>
+                    <p>Bringing traditional flavors to modern tables</p>
+                </div>
+
+                <div class="about-section">
+                    <h2>Our Story</h2>
+                    <p>Sea Salt Pickles is built on a foundation of tradition, quality, and authentic taste. Our journey began with a simple mission: to preserve the time-honored recipes that have been passed down through generations.</p>
+                    <p>Every pickle we create is a testament to our commitment to quality and authenticity. We use only the finest ingredients, combined with traditional methods to bring you flavors that remind you of home.</p>
+                </div>
+
+                <div class="about-section">
+                    <h2>Why Choose Us?</h2>
+                    <p>• 100% natural ingredients with no artificial preservatives</p>
+                    <p>• Traditional recipes perfected over generations</p>
+                    <p>• Strict quality control at every step</p>
+                    <p>• Fresh preparation and fast delivery</p>
+                    <p>• Wide variety of authentic pickles and condiments</p>
+                </div>
+
+                <div class="about-section">
+                    <h2>Our Commitment</h2>
+                    <p>We are committed to maintaining the highest standards of quality and hygiene. Each product is prepared with care, ensuring that you receive only the best. Our goal is to become your trusted source for authentic, homemade pickles.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div id="contactPage" class="page">
+        <div class="container">
+            <div class="contact-content">
+                <h1>Contact Us</h1>
+
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <p>+91 XXXXXXXXXX</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>info@seasaltpickles.com</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-details">
+                            <h3>Address</h3>
+                            <p>Visit our website for location details</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h2>Send us a Message</h2>
+                    <form onsubmit="handleContactSubmit(event)">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea class="form-input" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== BOTTOM NAVIGATION (MOBILE) ==================== -->
+    <nav class="bottom-nav">
+        <div class="bottom-nav-items">
+            <button class="bottom-nav-item active" onclick="navigateTo('home')" data-page="home">
+                <span>🏠</span>
+                <span>Home</span>
+            </button>
+            <button class="bottom-nav-item" onclick="navigateTo('shop')" data-page="shop">
+                <span>🛍️</span>
+                <span>Shop</span>
+            </button>
+            <button class="bottom-nav-item" onclick="navigateTo('spin')" data-page="spin">
+                <span>🎡</span>
+                <span>Spin</span>
+            </button>
+            <button class="bottom-nav-item" onclick="navigateTo('cart')" data-page="cart">
+                <span>🛒</span>
+                <span>Cart</span>
+            </button>
+            <button class="bottom-nav-item" onclick="navigateTo('about')" data-page="about">
+                <span>ℹ️</span>
+                <span>About</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ==================== LOGIN MODAL ==================== -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Login to Spin</h2>
+                <p>Enter your details to continue</p>
+            </div>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="loginName" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="loginPhone" class="form-input" pattern="[0-9]{10}" maxlength="10" placeholder="10 digit number" required>
+                    <div class="error-msg" id="phoneError">Please enter a valid 10-digit phone number</div>
+                </div>
+                <button type="submit" class="btn-primary">Send OTP</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== OTP MODAL ==================== -->
+    <div id="otpModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Verify OTP</h2>
+                <p>Enter the OTP sent to your phone</p>
+                <p style="color: var(--accent); font-size: 12px; margin-top: 8px;">Demo OTP: <span id="demoOTP"></span></p>
+            </div>
+            <form onsubmit="handleOTP(event)">
+                <div class="form-group">
+                    <label>OTP</label>
+                    <input type="text" id="otpInput" class="form-input" maxlength="6" pattern="[0-9]{6}" required>
+                    <div class="error-msg" id="otpError">Invalid OTP. Please try again.</div>
+                </div>
+                <button type="submit" class="btn-primary">Verify OTP</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== CHECKOUT SUCCESS MODAL ==================== -->
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🎉 Order Placed!</h2>
+                <p>Your order has been successfully placed</p>
+            </div>
+            <div style="text-align: center; padding: 20px 0;">
+                <p style="color: var(--text-light); margin-bottom: 20px;">Thank you for shopping with us!</p>
+                <button class="btn-primary" onclick="closeCheckoutModal()">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TOAST NOTIFICATION ==================== -->
+    <div id="toast" class="toast"></div>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        // ==================== CONFIGURATION ====================
+        const CONFIG = {
+            SPIN: {
+                WIN_AMOUNT: 500,
+                WIN_PROBABILITY: 0.05, // 5% = 1 in 20
+                OTP_LENGTH: 6,
+                OTP_EXPIRY_MS: 2 * 60 * 1000
+            }
+        };
+
+        // ==================== PRODUCT DATABASE ====================
+        // NOTE: Replace with real data from seasaltpickles.com
+        const PRODUCTS = [
+            // VEG PICKLES
+            {
+                id: 1,
+                name: "Mango Pickle (Avakaya)",
+                category: "veg",
+                price: 250,
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23f5a623' width='300' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='60' text-anchor='middle' dy='.3em' fill='%23fff'%3E🥭%3C/text%3E%3C/svg%3E",
+                description: "Authentic Andhra style mango pickle made with raw mangoes, spices, and sesame oil. A perfect accompaniment to rice and roti.",
+                variants: ["250g", "500g", "1kg"],
+                bestseller: true
+            },
+            {
+                id: 2,
+                name: "Lemon Pickle",
+                category: "veg",
+                price: 180,
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23f4d03f' width='300' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='60' text-anchor='middle' dy='.3em' fill='%23fff'%3E🍋%3C/text%3E%3C/svg%3E",
+                description: "Tangy lemon pickle with the perfect blend of spices. Made with fresh lemons and traditional spices.",
+                variants: ["250g", "500g"]
+            },
+            {
+                id: 3,
+                name: "Mixed Vegetable Pickle",
+                category: "veg",
+                price: 220,
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23e67e22' width='300' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='60' text-anchor='middle' dy='.3em' fill='%23fff'%3E🥒%3C/text%3E%3C/svg%3E",
+                description: "A delightful mix of carrots, cauliflower, green chillies, and lemon in spicy brine.",
+                variants: ["250g", "500g", "1kg"]
+            },
+            {
+                id: 4,
+                name: "Gongura Pickle",
+                category: "veg",
+                price: 200,
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%238b4513' width='300' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='60' text-anchor='middle' dy='.3em' fill='%23fff'%3E🌿%3C/text%3E%3C/svg%3E",
+                description: "Traditional Andhra gongura (sorrel leaves) pickle. Tangy, spicy, and absolutely delicious.",
+                variants: ["250g", "500g"]
+            },
+            {
+                id: 5,
+                name: "Tomato Pickle",
+                category: "veg",
+                price: 190,
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23e74c3c' width='300' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='60' text-anchor='middle' dy='.3em' fill='%23fff'%3E🍅%3C/text%3E%3C/svg%3E",
+                description: "Sweet and tangy tomato pickle with a perfect balance of spices.",
+                variants: ["250g", "500g"]
+            },
+            {
+                id: 6,
+                name: "Garlic Pickle",
+                category: "veg",
+                price: 210,
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23c39bd3' width='300' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='60' text-anchor='middle' dy='.3em' fill='%23fff'%3E🧄%3C/text%3E%3C/svg%3E",
+                description: "Pungent and flavorful garlic pickle. Great for digestion and taste.",
+                variants: ["250g", "500g"]
+            },
+
+            // NON-VEG PICKLES
+            {
+                id: 7,
+                name: "Chicken Pickle",
+                category: "nonveg",
+                price: 350,
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23d35400' width='300' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='60' text-anchor='middle' dy='.3em' fill='%23fff'%3E🍗%3C/text%3E%3C/svg%3E",
+                description: "Spicy chicken pickle made with boneless chicken pieces and aromatic spices.",
+                variants: ["250g", "500g"],
+                bestseller: true
+            },
+            {
+                id: 8,
+                name: "Prawn Pickle",
+                category: "nonveg",
+                price: 450,
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23e8856b' width='300' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='60' text-anchor='middle' dy='.3em' fill='%23fff'%3E🦐%3C/text%3E%3C/svg%3E",
+                description: "Coastal delicacy - prawns cooked with spices and preserved in oil.",
+                variants: ["250g", "500g"]
+            },
+            {
+                id: 9,
+                name: "Fish Pickle",
+                category: "nonveg",
+                price: 380,
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%235dade2' width='300' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='60' text-anchor='middle' dy='.3em' fill='%23fff'%3E🐟%3C/text%3E%3C/svg%3E",
+                description: "Traditional fish pickle with authentic coastal flavors.",
+                variants: ["250g", "500g"]
+            },
+            {
+                id: 10,
+                name: "Mutton Pickle",
+                category: "nonveg",
+                price: 480,
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%238b4513' width='300' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='60' text-anchor='middle' dy='.3em' fill='%23fff'%3E🍖%3C/text%3E%3C/svg%3E",
+                description: "Rich and flavorful mutton pickle - a meat lover's delight.",
+                variants: ["250g", "500g"]
+            },
+
+            // MASALAS & PODIS
+            {
+                id: 11,
+                name: "Gunpowder Spice Mix",
+                category: "masala",
+                price: 150,
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23a04000' width='300' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='60' text-anchor='middle' dy='.3em' fill='%23fff'%3E🌶️%3C/text%3E%3C/svg%3E",
+                description: "Fiery spice powder perfect with idli, dosa, or rice.",
+                variants: ["100g", "250g", "500g"]
+            },
+            {
+                id: 12,
+                name: "Garam Masala",
+                category: "masala",
+                price: 120,
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23d68910' width='300' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='60' text-anchor='middle' dy='.3em' fill='%23fff'%3E✨%3C/text%3E%3C/svg%3E",
+                description: "Aromatic blend of roasted spices for authentic Indian curries.",
+                variants: ["100g", "250g"]
+            },
+            {
+                id: 13,
+                name: "Curry Leaves Powder",
+                category: "masala",
+                price: 100,
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23186a3b' width='300' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='60' text-anchor='middle' dy='.3em' fill='%23fff'%3E🌿%3C/text%3E%3C/svg%3E",
+                description: "Fresh curry leaves powder with lentils and spices.",
+                variants: ["100g", "250g"]
+            },
+
+            // SWEETS & SNACKS
+            {
+                id: 14,
+                name: "Mango Sweet Murabba",
+                category: "sweet",
+                price: 280,
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23f8b500' width='300' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='60' text-anchor='middle' dy='.3em' fill='%23fff'%3E🍯%3C/text%3E%3C/svg%3E",
+                description: "Sweet mango preserve in sugar syrup - a traditional delicacy.",
+                variants: ["250g", "500g"]
+            },
+            {
+                id: 15,
+                name: "Amla Candy",
+                category: "sweet",
+                price: 180,
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%2385c1e9' width='300' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='60' text-anchor='middle' dy='.3em' fill='%23fff'%3E🍬%3C/text%3E%3C/svg%3E",
+                description: "Healthy and tasty amla candy - rich in Vitamin C.",
+                variants: ["200g", "500g"]
+            },
+            {
+                id: 16,
+                name: "Spicy Murukku",
+                category: "sweet",
+                price: 160,
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23f39c12' width='300' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='60' text-anchor='middle' dy='.3em' fill='%23fff'%3E🥨%3C/text%3E%3C/svg%3E",
+                description: "Crispy and spicy traditional South Indian snack.",
+                variants: ["200g", "500g"]
+            },
+
+            // COMBOS
+            {
+                id: 17,
+                name: "Pickle Combo Pack (3 in 1)",
+                category: "combo",
+                price: 600,
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23a569bd' width='300' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='60' text-anchor='middle' dy='.3em' fill='%23fff'%3E🎁%3C/text%3E%3C/svg%3E",
+                description: "Mango, Lemon, and Mixed Veg pickle combo - 250g each.",
+                variants: null,
+                bestseller: true
+            },
+            {
+                id: 18,
+                name: "Non-Veg Special Pack",
+                category: "combo",
+                price: 1100,
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23ec7063' width='300' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='60' text-anchor='middle' dy='.3em' fill='%23fff'%3E🎁%3C/text%3E%3C/svg%3E",
+                description: "Chicken, Prawn, and Fish pickle - 250g each.",
+                variants: null
+            },
+            {
+                id: 19,
+                name: "Festival Special Gift Pack",
+                category: "combo",
+                price: 850,
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23f4d03f' width='300' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='60' text-anchor='middle' dy='.3em' fill='%23fff'%3E🎊%3C/text%3E%3C/svg%3E",
+                description: "Perfect gift pack with 2 pickles, 1 podi, and 1 sweet.",
+                variants: null,
+                bestseller: true
+            },
+            {
+                id: 20,
+                name: "Breakfast Essentials Pack",
+                category: "combo",
+                price: 450,
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%2358d68d' width='300' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='60' text-anchor='middle' dy='.3em' fill='%23fff'%3E☀️%3C/text%3E%3C/svg%3E",
+                description: "Gunpowder podi, Curry leaves powder, and Garam masala combo.",
+                variants: null
+            }
+        ];
+
+        // ==================== STATE MANAGEMENT ====================
+        let currentPage = 'home';
+        let currentCategory = 'all';
+        let currentProduct = null;
+        let currentProductVariant = null;
+        let detailQuantity = 1;
+        let cart = [];
+        let walletBalance = 0;
+        let userPhone = null;
+        let generatedOTP = null;
+        let otpTimestamp = null;
+        let hasSpun = false;
+
+        // ==================== INITIALIZATION ====================
+        function init() {
+            loadFromStorage();
+            updateWalletDisplay();
+            updateCartBadge();
+            renderProducts();
+            
+            // Check if user should see spin page first
+            if (!hasSpun && walletBalance === 0) {
+                navigateTo('spin');
+            } else {
+                navigateTo('home');
+            }
+        }
+
+        function loadFromStorage() {
+            try {
+                walletBalance = parseInt(localStorage.getItem('walletBalance') || '0');
+                cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                userPhone = localStorage.getItem('userPhone');
+                hasSpun = localStorage.getItem('hasSpun') === 'true';
+            } catch (e) {
+                console.error('Storage error:', e);
+            }
+        }
+
+        function saveToStorage() {
+            try {
+                localStorage.setItem('walletBalance', walletBalance.toString());
+                localStorage.setItem('cart', JSON.stringify(cart));
+                if (userPhone) localStorage.setItem('userPhone', userPhone);
+                localStorage.setItem('hasSpun', hasSpun.toString());
+            } catch (e) {
+                console.error('Storage error:', e);
+            }
+        }
+
+        // ==================== NAVIGATION ====================
+        function navigateTo(page) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            
+            // Show selected page
+            const pageElement = document.getElementById(page + 'Page');
+            if (pageElement) {
+                pageElement.classList.add('active');
+                currentPage = page;
+                
+                // Update nav buttons
+                document.querySelectorAll('.nav-btn, .bottom-nav-item').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.page === page) {
+                        btn.classList.add('active');
+                    }
+                });
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+                
+                // Page-specific actions
+                if (page === 'cart') {
+                    renderCart();
+                } else if (page === 'shop') {
+                    renderProducts();
+                }
+            }
+        }
+
+        // ==================== SPIN WHEEL ====================
+        function initiateSpin() {
+            // Check if already spun with this phone
+            if (hasSpun) {
+                showToast('You have already used your spin!', 'error');
+                setTimeout(() => navigateTo('shop'), 2000);
+                return;
+            }
+            
+            // Show login modal
+            document.getElementById('loginModal').classList.add('show');
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const name = document.getElementById('loginName').value.trim();
+            const phone = document.getElementById('loginPhone').value.trim();
+            
+            if (phone.length !== 10 || !/^\d+$/.test(phone)) {
+                document.getElementById('phoneError').classList.add('show');
+                return;
+            }
+            
+            // Check if this phone has already spun
+            const spunPhones = JSON.parse(localStorage.getItem('spunPhones') || '[]');
+            if (spunPhones.includes(phone)) {
+                showToast('This phone number has already been used!', 'error');
+                return;
+            }
+            
+            userPhone = phone;
+            generateOTP();
+            
+            // Hide login modal, show OTP modal
+            document.getElementById('loginModal').classList.remove('show');
+            document.getElementById('otpModal').classList.add('show');
+        }
+
+        function generateOTP() {
+            generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+            otpTimestamp = Date.now();
+            document.getElementById('demoOTP').textContent = generatedOTP;
+            console.log('Demo OTP:', generatedOTP);
+        }
+
+        function handleOTP(e) {
+            e.preventDefault();
+            const otpInput = document.getElementById('otpInput').value.trim();
+            
+            // Check expiry
+            if (Date.now() - otpTimestamp > CONFIG.SPIN.OTP_EXPIRY_MS) {
+                document.getElementById('otpError').textContent = 'OTP expired. Please try again.';
+                document.getElementById('otpError').classList.add('show');
+                return;
+            }
+            
+            // Verify OTP
+            if (otpInput === generatedOTP) {
+                document.getElementById('otpModal').classList.remove('show');
+                executeSpin();
+            } else {
+                document.getElementById('otpError').classList.add('show');
+            }
+        }
+
+        function executeSpin() {
+            const spinBtn = document.getElementById('spinBtn');
+            spinBtn.disabled = true;
+            spinBtn.textContent = 'SPINNING...';
+            
+            const wheel = document.getElementById('wheel');
+            const spins = 5 + Math.floor(Math.random() * 3); // 5-7 full rotations
+            const degrees = spins * 360 + Math.floor(Math.random() * 360);
+            
+            wheel.style.transform = `rotate(${degrees}deg)`;
+            
+            // Determine win based on probability
+            const isWinner = Math.random() < CONFIG.SPIN.WIN_PROBABILITY;
+            
+            setTimeout(() => {
+                showSpinResult(isWinner);
+            }, 5000);
+        }
+
+        function showSpinResult(isWinner) {
+            const resultDiv = document.getElementById('spinResult');
+            const resultIcon = document.getElementById('resultIcon');
+            const resultTitle = document.getElementById('resultTitle');
+            const resultMessage = document.getElementById('resultMessage');
+            
+            if (isWinner) {
+                walletBalance = CONFIG.SPIN.WIN_AMOUNT;
+                resultIcon.textContent = '🎉';
+                resultTitle.textContent = 'Congratulations!';
+                resultMessage.textContent = `You won ₹${CONFIG.SPIN.WIN_AMOUNT}! Added to your wallet.`;
+                
+                // Create confetti
+                createConfetti();
+            } else {
+                resultIcon.textContent = '😊';
+                resultTitle.textContent = 'Better Luck Next Time!';
+                resultMessage.textContent = 'Thank you for participating. Explore our delicious pickles!';
+            }
+            
+            resultDiv.classList.add('show');
+            
+            // Mark as spun
+            hasSpun = true;
+            const spunPhones = JSON.parse(localStorage.getItem('spunPhones') || '[]');
+            spunPhones.push(userPhone);
+            localStorage.setItem('spunPhones', JSON.stringify(spunPhones));
+            
+            saveToStorage();
+            updateWalletDisplay();
+            
+            // Redirect to shop after 3 seconds
+            setTimeout(() => {
+                navigateTo('shop');
+            }, 3000);
+        }
+
+        function createConfetti() {
+            const colors = ['#FFD700', '#FF6B6B', '#4ECDC4', '#45B7D1', '#F7B731'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 30);
+            }
+        }
+
+        // ==================== PRODUCT RENDERING ====================
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            const filtered = currentCategory === 'all' 
+                ? PRODUCTS 
+                : PRODUCTS.filter(p => p.category === currentCategory);
+            
+            grid.innerHTML = filtered.map(product => `
+                <div class="product-card" onclick="viewProductDetail(${product.id})">
+                    ${product.bestseller ? '<div class="product-badge">BESTSELLER</div>' : ''}
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <div class="product-category">${getCategoryName(product.category)}</div>
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-price">₹${product.price}</div>
+                        <div class="product-actions">
+                            <button class="btn-secondary" onclick="event.stopPropagation(); viewProductDetail(${product.id})">View</button>
+                            <button class="btn-add-cart" onclick="event.stopPropagation(); quickAddToCart(${product.id})">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getCategoryName(category) {
+            const names = {
+                'veg': 'Veg Pickles',
+                'nonveg': 'Non-Veg Pickles',
+                'masala': 'Masalas & Podis',
+                'sweet': 'Sweets & Snacks',
+                'combo': 'Combo Packs'
+            };
+            return names[category] || category;
+        }
+
+        function filterCategory(category) {
+            currentCategory = category;
+            renderProducts();
+            
+            // Update active button
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // ==================== PRODUCT DETAIL ====================
+        function viewProductDetail(productId) {
+            currentProduct = PRODUCTS.find(p => p.id === productId);
+            if (!currentProduct) return;
+            
+            document.getElementById('detailImage').src = currentProduct.image;
+            document.getElementById('detailCategory').textContent = getCategoryName(currentProduct.category);
+            document.getElementById('detailName').textContent = currentProduct.name;
+            document.getElementById('detailPrice').textContent = '₹' + currentProduct.price;
+            document.getElementById('detailDescription').textContent = currentProduct.description;
+            
+            // Reset quantity
+            detailQuantity = 1;
+            document.getElementById('detailQty').textContent = detailQuantity;
+            
+            // Handle variants
+            if (currentProduct.variants) {
+                const variantSelector = document.getElementById('variantSelector');
+                const variantOptions = document.getElementById('variantOptions');
+                variantSelector.style.display = 'block';
+                
+                variantOptions.innerHTML = currentProduct.variants.map((v, i) => `
+                    <button class="variant-option ${i === 0 ? 'active' : ''}" 
+                            onclick="selectVariant('${v}')">${v}</button>
+                `).join('');
+                
+                currentProductVariant = currentProduct.variants[0];
+            } else {
+                document.getElementById('variantSelector').style.display = 'none';
+                currentProductVariant = null;
+            }
+            
+            navigateTo('productDetail');
+        }
+
+        function selectVariant(variant) {
+            currentProductVariant = variant;
+            document.querySelectorAll('.variant-option').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === variant) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function changeDetailQty(delta) {
+            detailQuantity = Math.max(1, detailQuantity + delta);
+            document.getElementById('detailQty').textContent = detailQuantity;
+        }
+
+        function addToCartFromDetail() {
+            if (!currentProduct) return;
+            
+            addToCart(currentProduct.id, detailQuantity, currentProductVariant);
+            showToast('Added to cart!', 'success');
+        }
+
+        function buyNowFromDetail() {
+            if (!currentProduct) return;
+            
+            addToCart(currentProduct.id, detailQuantity, currentProductVariant);
+            navigateTo('cart');
+        }
+
+        function quickAddToCart(productId) {
+            addToCart(productId, 1, null);
+            showToast('Added to cart!', 'success');
+        }
+
+        // ==================== CART MANAGEMENT ====================
+        function addToCart(productId, quantity, variant) {
+            const product = PRODUCTS.find(p => p.id === productId);
+            if (!product) return;
+            
+            const cartKey = `${productId}-${variant || 'default'}`;
+            const existingItem = cart.find(item => item.key === cartKey);
+            
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({
+                    key: cartKey,
+                    productId: productId,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    variant: variant,
+                    quantity: quantity
+                });
+            }
+            
+            saveToStorage();
+            updateCartBadge();
+        }
+
+        function updateCartQuantity(cartKey, delta) {
+            const item = cart.find(i => i.key === cartKey);
+            if (!item) return;
+            
+            item.quantity = Math.max(1, item.quantity + delta);
+            saveToStorage();
+            renderCart();
+        }
+
+        function removeFromCart(cartKey) {
+            cart = cart.filter(i => i.key !== cartKey);
+            saveToStorage();
+            updateCartBadge();
+            renderCart();
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cartContent');
+            
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="cart-empty">
+                        <div class="cart-empty-icon">🛒</div>
+                        <h2>Your cart is empty</h2>
+                        <p>Add some delicious pickles to get started!</p>
+                        <button class="hero-btn" onclick="navigateTo('shop')">Shop Now</button>
+                    </div>
+                `;
+                return;
+            }
+            
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const walletUsed = Math.min(walletBalance, subtotal);
+            const finalTotal = subtotal - walletUsed;
+            
+            container.innerHTML = `
+                <div class="cart-items">
+                    ${cart.map(item => `
+                        <div class="cart-item">
+                            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                            <div class="cart-item-info">
+                                <div class="cart-item-name">${item.name}</div>
+                                ${item.variant ? `<div class="cart-item-variant">${item.variant}</div>` : ''}
+                                <div class="cart-item-price">₹${item.price} × ${item.quantity} = ₹${item.price * item.quantity}</div>
+                            </div>
+                            <div class="cart-item-controls">
+                                <div class="cart-qty-controls">
+                                    <button class="cart-qty-btn" onclick="updateCartQuantity('${item.key}', -1)">-</button>
+                                    <span class="cart-qty-value">${item.quantity}</span>
+                                    <button class="cart-qty-btn" onclick="updateCartQuantity('${item.key}', 1)">+</button>
+                                </div>
+                                <button class="cart-remove-btn" onclick="removeFromCart('${item.key}')">🗑️ Remove</button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span>₹${subtotal}</span>
+                    </div>
+                    ${walletUsed > 0 ? `
+                        <div class="summary-row wallet-applied">
+                            <span>Wallet Credit:</span>
+                            <span>- ₹${walletUsed}</span>
+                        </div>
+                    ` : ''}
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span>₹${finalTotal}</span>
+                    </div>
+                </div>
+                
+                <button class="checkout-btn" onclick="proceedToCheckout()">
+                    Proceed to Checkout
+                </button>
+            `;
+        }
+
+        function proceedToCheckout() {
+            if (cart.length === 0) return;
+            
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const walletUsed = Math.min(walletBalance, subtotal);
+            
+            // Deduct wallet
+            walletBalance = Math.max(0, walletBalance - walletUsed);
+            
+            // Clear cart
+            cart = [];
+            
+            saveToStorage();
+            updateWalletDisplay();
+            updateCartBadge();
+            
+            // Show success modal
+            document.getElementById('checkoutModal').classList.add('show');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkoutModal').classList.remove('show');
+            navigateTo('shop');
+        }
+
+        // ==================== UI HELPERS ====================
+        function updateWalletDisplay() {
+            document.getElementById('walletAmount').textContent = '₹' + walletBalance;
+        }
+
+        function updateCartBadge() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartBadge').textContent = totalItems;
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast show ' + type;
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            showToast('Message sent successfully!', 'success');
+            e.target.reset();
+        }
+
+        // ==================== INITIALIZE ON LOAD ====================
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
 
