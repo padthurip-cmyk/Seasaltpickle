@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ============================================ SEO & META TAGS ============================================ -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SeaSalt Pickles - Premium handcrafted pickles and fermented foods. Fresh, organic, and delicious pickles delivered to your home.">
+    <meta name="keywords" content="pickles, fermented foods, organic pickles, handcrafted, seasalt, premium pickles">
+    <meta name="author" content="SeaSalt Pickles">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph for Social Sharing -->
+    <meta property="og:title" content="SeaSalt Pickles - Premium Handcrafted Pickles">
+    <meta property="og:description" content="Discover our collection of premium handcrafted pickles made fresh with the finest ingredients.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.seasaltpickles.com">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630?text=SeaSalt+Pickles">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SeaSalt Pickles - Premium Handcrafted Pickles">
+    <meta name="twitter:description" content="Discover our collection of premium handcrafted pickles">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.seasaltpickles.com">
+    
+    <title>SeaSalt Pickles - Premium Handcrafted Pickles Online</title>
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="font-inter bg-white">
+    <!-- ============================================ SPIN WHEEL MODAL ============================================ -->
+    <div id="spinWheelModal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 max-w-2xl w-full mx-4 shadow-2xl">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-3xl font-playfair font-bold text-gray-900">Lucky Spin Wheel</h2>
+                <button onclick="closeSpinWheel()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            
+            <!-- Auth Section -->
+            <div id="authSection" class="space-y-4 mb-8">
+                <p class="text-gray-600">Enter your phone number to unlock your lucky spin!</p>
+                <div class="flex gap-2">
+                    <input type="tel" id="phoneInput" placeholder="Enter 10-digit phone number" maxlength="10" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                    <button onclick="requestOTP()" class="px-6 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition">Get OTP</button>
+                </div>
+                <div id="otpSection" class="hidden space-y-3">
+                    <p class="text-sm text-gray-600">OTP sent to your phone</p>
+                    <div class="flex gap-2">
+                        <input type="text" id="otpInput" placeholder="Enter 4-digit OTP" maxlength="4" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                        <button onclick="verifyOTP()" class="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">Verify</button>
+                    </div>
+                    <p class="text-xs text-gray-500">OTP: 1234 (demo mode)</p>
+                </div>
+            </div>
+            
+            <!-- Spin Wheel Section -->
+            <div id="spinSection" class="hidden text-center space-y-6">
+                <div class="flex justify-center">
+                    <canvas id="spinCanvas" width="300" height="300"></canvas>
+                </div>
+                <div id="spinInfo" class="bg-blue-50 p-4 rounded-lg">
+                    <p class="text-sm text-gray-700">Spins Remaining: <span id="spinsRemaining" class="font-bold text-teal-600">2</span></p>
+                </div>
+                <button id="spinButton" onclick="startSpin()" class="w-full px-6 py-3 bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-bold rounded-lg hover:shadow-lg transition text-lg">
+                    SPIN NOW
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ============================================ CONGRATULATIONS MODAL ============================================ -->
+    <div id="congratsModal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 max-w-md text-center shadow-2xl animate-bounce-in">
+            <div class="text-6xl mb-4">🎉</div>
+            <h2 class="text-3xl font-playfair font-bold text-green-600 mb-4">Congratulations!</h2>
+            <p id="prizeText" class="text-xl text-gray-700 mb-2"></p>
+            <p class="text-sm text-gray-500">Your reward has been added to your wallet!</p>
+        </div>
+    </div>
+    
+    <!-- ============================================ HEADER/NAVBAR ============================================ -->
+    <header class="sticky top-0 bg-white border-b border-gray-100 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2 cursor-pointer" onclick="navigateTo('home')">
+                    <div class="w-10 h-10 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">🥒</span>
+                    </div>
+                    <span class="hidden sm:inline font-playfair font-bold text-xl text-gray-900">SeaSalt</span>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="hidden md:flex flex-1 max-w-md mx-8">
+                    <div class="w-full relative">
+                        <input type="text" id="searchInput" placeholder="Search pickles..." class="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500">
+                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-teal-500">🔍</button>
+                    </div>
+                </div>
+                
+                <!-- Right Actions -->
+                <div class="flex items-center space-x-4">
+                    <!-- Wallet -->
+                    <button onclick="openSpinWheel()" class="hidden sm:flex items-center space-x-2 px-3 py-2 text-sm bg-teal-50 rounded-lg hover:bg-teal-100 transition group">
+                        <span class="text-lg">💰</span>
+                        <div class="text-left">
+                            <p class="text-xs text-gray-600">Wallet</p>
+                            <p class="text-sm font-bold text-teal-600">₹<span id="walletBalance">0</span></p>
+                        </div>
+                    </button>
+                    
+                    <!-- Cart -->
+                    <button onclick="toggleCart()" class="relative p-2 hover:bg-gray-100 rounded-lg transition group">
+                        <span class="text-2xl">🛒</span>
+                        <span id="cartCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center hidden">0</span>
+                    </button>
+                    
+                    <!-- Mobile Menu -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden p-2 hover:bg-gray-100 rounded-lg">
+                        <span class="text-2xl">☰</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobileMenu" class="hidden md:hidden border-t border-gray-100">
+            <div class="px-4 py-4 space-y-3">
+                <input type="text" placeholder="Search pickles..." class="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm">
+                <nav class="flex flex-col space-y-2">
+                    <a href="#about" class="text-gray-700 hover:text-teal-600 py-2">About Us</a>
+                    <a href="#contact" class="text-gray-700 hover:text-teal-600 py-2">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <!-- ============================================ HERO SECTION ============================================ -->
+    <section id="hero" class="relative overflow-hidden bg-gradient-to-br from-teal-50 via-white to-emerald-50 py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="space-y-6">
+                    <h1 class="text-5xl md:text-6xl font-playfair font-bold text-gray-900 leading-tight">
+                        Premium Handcrafted <span class="text-teal-600">Pickles</span>
+                    </h1>
+                    <p class="text-lg text-gray-600">
+                        Freshly made with organic ingredients and traditional recipes. Taste the difference of authentic, fermented goodness delivered to your doorstep.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                        <button onclick="scrollToProducts()" class="px-8 py-3 bg-gradient-to-r from-teal-500 to-emerald-600 text-white font-semibold rounded-lg hover:shadow-lg transition">
+                            Shop Now
+                        </button>
+                        <button onclick="openSpinWheel()" class="px-8 py-3 border-2 border-teal-500 text-teal-600 font-semibold rounded-lg hover:bg-teal-50 transition">
+                            🎡 Try Your Luck
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Right Image -->
+                <div class="relative h-96 md:h-full">
+                    <div class="absolute inset-0 bg-gradient-to-br from-teal-200 to-emerald-200 rounded-3xl blur-3xl opacity-20"></div>
+                    <div class="relative h-96 bg-gradient-to-br from-teal-100 to-emerald-100 rounded-3xl flex items-center justify-center overflow-hidden">
+                        <div class="text-center">
+                            <div class="text-9xl mb-4">🥒</div>
+                            <p class="text-gray-600 font-semibold">100% Natural</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ============================================ FEATURES SECTION ============================================ -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center p-6 hover:bg-gray-50 rounded-lg transition">
+                    <div class="text-4xl mb-3">⚡</div>
+                    <h3 class="font-bold text-lg text-gray-900 mb-2">Fresh Daily</h3>
+                    <p class="text-gray-600 text-sm">Made fresh and delivered within 24-48 hours</p>
+                </div>
+                <div class="text-center p-6 hover:bg-gray-50 rounded-lg transition">
+                    <div class="text-4xl mb-3">🌱</div>
+                    <h3 class="font-bold text-lg text-gray-900 mb-2">100% Organic</h3>
+                    <p class="text-gray-600 text-sm">No preservatives, no artificial colors or flavors</p>
+                </div>
+                <div class="text-center p-6 hover:bg-gray-50 rounded-lg transition">
+                    <div class="text-4xl mb-3">🏆</div>
+                    <h3 class="font-bold text-lg text-gray-900 mb-2">Award Winning</h3>
+                    <p class="text-gray-600 text-sm">Trusted by thousands of happy customers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ============================================ PRODUCTS SECTION ============================================ -->
+    <section id="products" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-playfair font-bold text-gray-900 mb-12 text-center">Our Collections</h2>
+            
+            <!-- Product Grid -->
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Products will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- ============================================ PRODUCT MODAL ============================================ -->
+    <div id="productModal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-96 overflow-y-auto shadow-2xl">
+            <div class="sticky top-0 flex justify-between items-center p-6 bg-white border-b border-gray-100">
+                <h3 id="modalProductName" class="text-2xl font-bold text-gray-900"></h3>
+                <button onclick="closeProductModal()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            
+            <div class="p-6 space-y-6">
+                <!-- Product Image -->
+                <div id="modalProductImage" class="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center text-6xl"></div>
+                
+                <!-- Description -->
+                <div>
+                    <h4 class="font-semibold text-gray-900 mb-2">Description</h4>
+                    <p id="modalProductDesc" class="text-gray-600 leading-relaxed"></p>
+                </div>
+                
+                <!-- Size Options -->
+                <div>
+                    <h4 class="font-semibold text-gray-900 mb-3">Select Size</h4>
+                    <div id="sizeOptions" class="grid grid-cols-3 gap-3"></div>
+                </div>
+                
+                <!-- Price & Cart -->
+                <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                    <div>
+                        <p class="text-sm text-gray-600">Price</p>
+                        <p id="modalPrice" class="text-2xl font-bold text-teal-600">₹0</p>
+                    </div>
+                    <button id="addToCartBtn" onclick="addToCart()" class="px-6 py-3 bg-gradient-to-r from-teal-500 to-emerald-600 text-white font-semibold rounded-lg hover:shadow-lg transition">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ============================================ CART SIDEBAR ============================================ -->
+    <div id="cartSidebar" class="hidden fixed right-0 top-0 h-full w-96 bg-white shadow-2xl z-40 flex flex-col">
+        <!-- Cart Header -->
+        <div class="flex justify-between items-center p-6 border-b border-gray-100">
+            <h3 class="text-2xl font-bold text-gray-900">Shopping Cart</h3>
+            <button onclick="toggleCart()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+        </div>
+        
+        <!-- Cart Items -->
+        <div id="cartItems" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <p class="text-center text-gray-500 py-8">Your cart is empty</p>
+        </div>
+        
+        <!-- Cart Footer -->
+        <div class="border-t border-gray-100 p-6 space-y-4">
+            <div class="flex justify-between text-lg font-bold">
+                <span>Total:</span>
+                <span id="cartTotal" class="text-teal-600">₹0</span>
+            </div>
+            <button class="w-full px-6 py-3 bg-gradient-to-r from-teal-500 to-emerald-600 text-white font-semibold rounded-lg hover:shadow-lg transition" onclick="checkout()">
+                Proceed to Checkout
+            </button>
+        </div>
+    </div>
+    
+    <!-- ============================================ CART OVERLAY ============================================ -->
+    <div id="cartOverlay" class="hidden fixed inset-0 bg-black/30 z-30" onclick="toggleCart()"></div>
+    
+    <!-- ============================================ FOOTER ============================================ -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Company -->
+                <div>
+                    <h4 class="font-playfair font-bold text-lg mb-4">SeaSalt Pickles</h4>
+                    <p class="text-gray-400 text-sm">Premium handcrafted pickles made with love and the finest organic ingredients.</p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="#" onclick="openPage('privacy')" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" onclick="openPage('terms')" class="text-gray-400 hover:text-white transition">Terms & Conditions</a></li>
+                        <li><a href="#" onclick="openPage('shipping')" class="text-gray-400 hover:text-white transition">Shipping Policy</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-bold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>Email: hello@seasaltpickles.com</li>
+                        <li>Phone: +91 9876543210</li>
+                        <li>Address: Bangalore, India</li>
+                    </ul>
+                </div>
+                
+                <!-- Social -->
+                <div>
+                    <h4 class="font-bold mb-4">Follow Us</h4>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition text-xl">f</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition text-xl">🐦</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition text-xl">📷</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2024 SeaSalt Pickles. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- ============================================ SCRIPTS ============================================ -->
+    <script src="spin-wheel.js"></script>
+    <script src="app.js"></script>
+    <script src="seo-schema.js"></script>
+</body>
+</html>

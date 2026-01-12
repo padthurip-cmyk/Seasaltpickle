@@ -1,0 +1,59 @@
+# Netlify Configuration for SeaSalt Pickles
+# This file enables auto-deployment and configuration management
+
+[build]
+  # No build step needed - static site
+  command = "echo 'Building SeaSalt Pickles...'"
+  # Publish directory
+  publish = "."
+
+# Environment variables for production
+[build.environment]
+  # Razorpay credentials (set in Netlify UI for security)
+  # RAZORPAY_KEY_ID = "YOUR_KEY"
+  # SHIPROCKET_AUTH_TOKEN = "YOUR_TOKEN"
+  NODE_VERSION = "18"
+
+# Redirect rules for SPA routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Cache headers for performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "no-referrer-when-downgrade"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' checkout.razorpay.com https://cdn.tailwindcss.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' api.razorpay.com apiv2.shiprocket.in"
+
+# Cache static assets
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.woff*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Form submission handling (optional)
+[[form]]
+  name = "contact"
+  method = "POST"
+
+# Redirect HTTP to HTTPS (optional - Netlify handles automatically)
+[[redirects]]
+  from = "http://seasaltpickles.com/*"
+  to = "https://seasaltpickles.com/:splat"
+  status = 301
+  force = true
